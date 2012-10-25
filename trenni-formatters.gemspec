@@ -24,6 +24,5 @@ Gem::Specification.new do |gem|
 	gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
 	gem.require_paths = ["lib"]
 	
-	gem.add_dependency "trenni", "~> 1.0.3"
-	gem.add_dependency "redcarpet", "~> 2.1.1"
+	gem.add_dependency "trenni", "~> 1.0.4"
 end

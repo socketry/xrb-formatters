@@ -24,7 +24,7 @@ require 'pathname'
 require 'test/unit'
 require 'stringio'
 
-require 'trenni'
+require 'trenni/formatters'
 require 'trenni/formatters/html/definition_list_form'
 require 'trenni/formatters/html/option_select'
 require 'trenni/formatters/html/table_select'

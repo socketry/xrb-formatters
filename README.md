@@ -37,6 +37,8 @@ a mapping corresponding to the objects type:
 		
 	assert_equal "String: foobar", formatter.format("foobar")
 
+For more examples please see `test/`.
+
 ## Contributing
 
 1. Fork it

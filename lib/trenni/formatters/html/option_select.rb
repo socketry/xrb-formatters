@@ -51,7 +51,7 @@ module Trenni
 					@formatter.title_for(options)
 				end
 
-				def item_attributes_for(options)
+				def option_attributes_for(options)
 					return {
 						:value => value_for(options),
 						:selected => options[:selected],

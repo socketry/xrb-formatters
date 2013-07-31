@@ -31,7 +31,6 @@ a mapping corresponding to the objects type:
 	formatter = Trenni::Formatters::Formatter.new
 		
 	formatter.for(String) do |value, options|
-		count += 1
 		"String: #{value}"
 	end
 		

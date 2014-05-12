@@ -36,6 +36,8 @@ module Trenni
 					@object = formatter.object
 					@field = options[:field]
 					
+					@options = options
+					
 					@builder = builder
 				end
 
@@ -54,7 +56,7 @@ module Trenni
 				def option_attributes_for(options)
 					return {
 						:value => value_for(options),
-						:selected => options[:selected],
+						:selected => options.fetch(:selected){ value_for(@options) == value_for(options) },
 					}
 				end
 

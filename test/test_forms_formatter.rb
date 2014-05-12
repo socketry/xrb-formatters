@@ -20,8 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'pathname'
-require 'test/unit'
+require 'minitest/autorun'
 require 'stringio'
 
 require 'trenni/formatters'
@@ -29,7 +28,7 @@ require 'trenni/formatters/html/definition_list_form'
 require 'trenni/formatters/html/option_select'
 require 'trenni/formatters/html/table_select'
 
-class TestFormsFormatter < Test::Unit::TestCase
+class TestFormsFormatter < MiniTest::Test
 	class BasicFormatter < Trenni::Formatters::Formatter
 		include Trenni::Formatters::HTML::DefinitionListForm
 	end

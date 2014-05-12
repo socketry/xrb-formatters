@@ -20,14 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'pathname'
-require 'test/unit'
+require 'minitest/autorun'
 require 'stringio'
 
 require 'trenni'
 require 'trenni/formatters'
 
-class TestFormatters < Test::Unit::TestCase
+class TestFormatters < MiniTest::Test
 	def test_basic_formatter
 		count = 0
 		formatter = Trenni::Formatters::Formatter.new

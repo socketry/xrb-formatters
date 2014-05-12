@@ -53,17 +53,28 @@ module Trenni
 				end
 
 				def pattern_for(options)
-					nil
+					options[:pattern]
+				end
+
+				def placeholder_for(options)
+					options[:placeholder]
 				end
 
 				def input_attributes_for(options)
-					return {
-							:type => options[:type],
-							:name => name_for(options),
-							:value => value_for(options),
-							:required => options[:required] ? true : false,
-							:pattern => pattern_for(options)
+					attributes = {
+						:type => options[:type],
+						:name => name_for(options),
+						:value => value_for(options),
+						:required => options[:required] ? true : false,
+						:pattern => pattern_for(options),
+						:placeholder => placeholder_for(options)
 					}
+					
+					if explicit_attributes = options[:attributes]
+						attributes.update(explicit_attributes)
+					end
+					
+					return attributes
 				end
 
 				# An input field (single line text).
@@ -83,6 +94,7 @@ module Trenni
 					return {
 						:name => name_for(options),
 						:required => options[:required] ? true : false,
+						:placeholder => placeholder_for(options),
 					}
 				end
 

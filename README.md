@@ -7,7 +7,7 @@ adapter that turns model data into presentation text.
 Formatters are designed to be customised, typically per-project, for specific
 formatting needs.
 
-[![Build Status](https://secure.travis-ci.org/ioquatix/trenni-formatters.png)](http://travis-ci.org/ioquatix/trenni-formatters)
+[![Build Status](https://travis-ci.org/ioquatix/trenni-formatters.svg?branch=master)](https://travis-ci.org/ioquatix/trenni-formatters)
 
 ## Installation
 
@@ -50,7 +50,7 @@ For more examples please see `test/`.
 
 Released under the MIT license.
 
-Copyright, 2012, by [Samuel G. D. Williams](http://www.codeotaku.com/samuel-williams).
+Copyright, 2014, by [Samuel G. D. Williams](http://www.codeotaku.com/samuel-williams).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

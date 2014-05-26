@@ -40,6 +40,13 @@ module Trenni
 					
 					expect(formatter.input(:field => :bar)).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
 				end
+				
+				it "should have default value" do
+					formatter = FormFormatter.new
+					
+					expect(formatter.value_for(:value => 10)).to be == "10"
+					expect(formatter.value_for(:value => nil, :default => 10)).to be == "10"
+				end
 			end
 		end
 	end

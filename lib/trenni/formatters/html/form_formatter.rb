@@ -49,6 +49,9 @@ module Trenni
 						value ||= options[:object].send(name_for(options))
 					end
 
+					# Allow to specify a default value if the value given, usually from an object, is nil.
+					value ||= options[:default]
+
 					self.format(value, options)
 				end
 

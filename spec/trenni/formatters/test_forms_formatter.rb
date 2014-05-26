@@ -20,29 +20,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'minitest/autorun'
-require 'stringio'
-
 require 'trenni/formatters'
 require 'trenni/formatters/html/definition_list_form'
 require 'trenni/formatters/html/option_select'
 require 'trenni/formatters/html/table_select'
 
-class TestFormsFormatter < MiniTest::Test
-	class BasicFormatter < Trenni::Formatters::Formatter
-		include Trenni::Formatters::HTML::DefinitionListForm
-	end
-	
-	class Foo
-		attr :bar, true
-	end
-	
-	def test_basic_formatter
-		object = Foo.new
-		object.bar = 10
-
-		formatter = BasicFormatter.new(:object => object)
-
-		assert_equal %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}, formatter.input(:field => :bar)
+module Trenni
+	module Formatters
+		module FormFormattersSpec
+			class FormFormatter < Trenni::Formatters::Formatter
+				include Trenni::Formatters::HTML::DefinitionListForm
+			end
+			
+			describe Formatters do
+				it "should generate form" do
+					object = double(:bar => 10)
+					
+					formatter = FormFormatter.new(:object => object)
+					
+					expect(formatter.input(:field => :bar)).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
+				end
+			end
+		end
 	end
 end

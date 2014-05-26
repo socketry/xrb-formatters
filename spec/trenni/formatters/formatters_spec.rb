@@ -20,26 +20,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'minitest/autorun'
-require 'stringio'
-
-require 'trenni'
 require 'trenni/formatters'
 
-class TestFormatters < MiniTest::Test
-	def test_basic_formatter
-		count = 0
-		formatter = Trenni::Formatters::Formatter.new
-		
-		formatter.for(String) do |value, options|
-			count += 1
-			"String: #{value}"
+module Trenni
+	module Formatters
+		module FormattersSpec
+			describe Formatters do
+				before do
+					@count = 0
+					@formatter = Trenni::Formatters::Formatter.new
+				
+					@formatter.for(String) do |value, options|
+						@count += 1
+						"String: #{value}"
+					end
+				end
+			
+				it "should format string" do
+					expect(@formatter.format("foobar")).to be == "String: foobar"
+					expect(@count).to be == 1
+				end
+			
+				it "should format numbers" do
+					expect(@formatter.format(10)).to be == "10"
+					expect(@count).to be == 0
+				end
+			end
 		end
-		
-		assert_equal "String: foobar", formatter.format("foobar")
-		assert_equal 1, count
-		
-		assert_equal "10", formatter.format(10)
-		assert_equal 1, count
 	end
 end

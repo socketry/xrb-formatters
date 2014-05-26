@@ -20,63 +20,14 @@
 
 require 'trenni/builder'
 
+require_relative 'form_formatter'
+
 module Trenni
 	module Formatters
 		module HTML
 			module DefinitionListForm
-				# The target object of the form.
-				def object
-					@options[:object]
-				end
-
-				# The name of the field.
-				def name_for(options)
-					options[:field] || title_for(options).downcase.gsub(/\s+/, '_').to_sym
-				end
-
-				# The human presentable title for the field.
-				def title_for(options)
-					title = options[:title] || Strings::to_title(options[:field].to_s)
-					
-					Strings::to_html(title)
-				end
-
-				# The value of the field.
-				def value_for(options)
-					value = options[:value]
-
-					if options[:object]
-						value ||= options[:object].send(name_for(options))
-					end
-
-					self.format(value, options)
-				end
-
-				def pattern_for(options)
-					options[:pattern]
-				end
-
-				def placeholder_for(options)
-					options[:placeholder]
-				end
-
-				def input_attributes_for(options)
-					attributes = {
-						:type => options[:type],
-						:name => name_for(options),
-						:value => value_for(options),
-						:required => options[:required] ? true : false,
-						:pattern => pattern_for(options),
-						:placeholder => placeholder_for(options)
-					}
-					
-					if explicit_attributes = options[:attributes]
-						attributes.update(explicit_attributes)
-					end
-					
-					return attributes
-				end
-
+				include FormFormatter
+				
 				# An input field (single line text).
 				def input(options = {})
 					options = @options.merge(options)
@@ -88,14 +39,6 @@ module Trenni
 							builder.tag :input, input_attributes_for(options)
 						end
 					end
-				end
-
-				def textarea_attributes_for(options)
-					return {
-						:name => name_for(options),
-						:required => options[:required] ? true : false,
-						:placeholder => placeholder_for(options),
-					}
 				end
 
 				# A textarea field (multi-line text).
@@ -113,16 +56,6 @@ module Trenni
 					end
 				end
 
-				def checkbox_attributes_for(options)
-					return {
-						:type => options[:type] || 'checkbox',
-						:checked => options[:object].send(name),
-						:name => name_for(options),
-						:required => options[:required] ? true : false,
-						:value => 'true',
-					}
-				end
-
 				# A checkbox field.
 				def checkbox(options)
 					options = @options.merge(options)
@@ -136,14 +69,6 @@ module Trenni
 					end
 				end
 
-				def submit_attributes_for(options)
-					return {
-						:type => options[:type] || 'submit',
-						:name => name_for(options),
-						:value => title_for(options),
-					}
-				end
-
 				# A submission button
 				def submit(options = {})
 					options = @options.merge(options)
@@ -154,23 +79,6 @@ module Trenni
 
 					Builder.fragment do |builder|
 						builder.tag :input, submit_attributes_for(options)
-					end
-				end
-
-				def hidden_attributes_for(options)
-					return {
-						:type => options[:type] || 'hidden',
-						:name => name_for(options),
-						:value => value_for(options),
-					}
-				end
-
-				# A hidden field.
-				def hidden(options = {})
-					options = @options.merge(options)
-
-					Builder.fragment do |builder|
-						builder.tag :input, hidden_attributes_for(options)
 					end
 				end
 

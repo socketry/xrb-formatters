@@ -22,30 +22,26 @@
 
 require 'trenni/formatters'
 
-module Trenni
-	module Formatters
-		module FormattersSpec
-			describe Formatters do
-				before do
-					@count = 0
-					@formatter = Trenni::Formatters::Formatter.new
-				
-					@formatter.for(String) do |value, options|
-						@count += 1
-						"String: #{value}"
-					end
-				end
-			
-				it "should format string" do
-					expect(@formatter.format("foobar")).to be == "String: foobar"
-					expect(@count).to be == 1
-				end
-			
-				it "should format numbers" do
-					expect(@formatter.format(10)).to be == "10"
-					expect(@count).to be == 0
-				end
+module Trenni::FormattersSpec
+	describe Trenni::Formatters do
+		before do
+			@count = 0
+			@formatter = Trenni::Formatters::Formatter.new
+		
+			@formatter.for(String) do |value, options|
+				@count += 1
+				"String: #{value}"
 			end
+		end
+	
+		it "should format string" do
+			expect(@formatter.format("foobar")).to be == "String: foobar"
+			expect(@count).to be == 1
+		end
+	
+		it "should format numbers" do
+			expect(@formatter.format(10)).to be == "10"
+			expect(@count).to be == 0
 		end
 	end
 end

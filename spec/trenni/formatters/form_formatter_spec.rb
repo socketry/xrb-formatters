@@ -25,29 +25,43 @@ require 'trenni/formatters/html/definition_list_form'
 require 'trenni/formatters/html/option_select'
 require 'trenni/formatters/html/table_select'
 
-module Trenni
-	module Formatters
-		module FormFormattersSpec
-			class FormFormatter < Trenni::Formatters::Formatter
-				include Trenni::Formatters::HTML::DefinitionListForm
-			end
+module Trenni::Formatters::FormFormatterSpec
+	class FormFormatter < Trenni::Formatters::Formatter
+		include Trenni::Formatters::HTML::DefinitionListForm
+	end
+	
+	describe Trenni::Formatters do
+		it "should generate form" do
+			object = double(:bar => 10)
 			
-			describe Formatters do
-				it "should generate form" do
-					object = double(:bar => 10)
-					
-					formatter = FormFormatter.new(:object => object)
-					
-					expect(formatter.input(:field => :bar)).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
-				end
-				
-				it "should have default value" do
-					formatter = FormFormatter.new
-					
-					expect(formatter.value_for(:value => 10)).to be == "10"
-					expect(formatter.value_for(:value => nil, :default => 10)).to be == "10"
-				end
-			end
+			formatter = FormFormatter.new(:object => object)
+			
+			output_tag = formatter.input(:field => :bar)
+			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
+		end
+		
+		it "should have default value" do
+			formatter = FormFormatter.new
+			
+			expect(formatter.value_for(:value => 10)).to be == "10"
+			expect(formatter.value_for(:value => nil, :default => 10)).to be == "10"
+		end
+	end
+	
+	describe "<input>" do
+		it "should support support min, max and step" do
+			object = double(:bar => 10)
+			
+			formatter = FormFormatter.new(:object => object)
+			
+			attributes = formatter.input_attributes_for(:min => 10, :max => 20, :step => 2)
+			
+			expect(attributes[:min]).to be == 10
+			expect(attributes[:max]).to be == 20
+			expect(attributes[:step]).to be == 2
+			
+			output_tag = formatter.input(:field => :bar, :min => 10)
+			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10" min="10"/></dd>}
 		end
 	end
 end

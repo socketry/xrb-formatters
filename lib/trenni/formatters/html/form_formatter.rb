@@ -70,7 +70,11 @@ module Trenni
 						:value => value_for(options),
 						:required => options[:required] ? true : false,
 						:pattern => pattern_for(options),
-						:placeholder => placeholder_for(options)
+						:placeholder => placeholder_for(options),
+						# for <input type="range|number">
+						:min => options[:min],
+						:max => options[:max],
+						:step => options[:step],
 					}
 					
 					if explicit_attributes = options[:attributes]

@@ -85,6 +85,15 @@ module Trenni
 					
 					return attributes
 				end
+
+				def output_attributes_for(options)
+					attributes = {
+						:name => name_for(options),
+						:id => options[:id],
+						:class => options[:class],
+						:for => options[:for],
+						:form => options[:form],
+					}
 					
 					return attributes
 				end

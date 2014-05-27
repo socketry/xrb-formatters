@@ -41,6 +41,19 @@ module Trenni
 					end
 				end
 
+				# An output field for the result of a computation.
+				def output(options = {})
+					options = @options.merge(options)
+
+					Builder.fragment do |builder|
+						builder.inline(:dt) { builder.text title_for(options) }
+
+						builder.inline(:dd) do
+							builder.tag :output, output_attributes_for(options)
+						end
+					end
+				end
+
 				# A textarea field (multi-line text).
 				def textarea(options = {})
 					options = @options.merge(options)

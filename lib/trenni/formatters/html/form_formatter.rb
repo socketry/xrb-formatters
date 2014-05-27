@@ -29,9 +29,13 @@ module Trenni
 					@options[:object]
 				end
 
-				# The name of the field.
+				# The name of the field, used for the name attribute of an input.
 				def name_for(options)
-					options[:field] || title_for(options).downcase.gsub(/\s+/, '_').to_sym
+					options[:name] || options[:field]
+				end
+				
+				def field_for(options)
+					options[:field]
 				end
 
 				# The human presentable title for the field.
@@ -46,7 +50,7 @@ module Trenni
 					value = options[:value]
 
 					if options[:object]
-						value ||= options[:object].send(name_for(options))
+						value ||= options[:object].send(field_for(options))
 					end
 
 					# Allow to specify a default value if the value given, usually from an object, is nil.

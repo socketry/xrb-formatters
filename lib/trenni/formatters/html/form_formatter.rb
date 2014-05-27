@@ -71,6 +71,8 @@ module Trenni
 					attributes = {
 						:type => options[:type],
 						:name => name_for(options),
+						:id => options[:id],
+						:class => options[:class],
 						:value => value_for(options),
 						:required => options[:required] ? true : false,
 						:pattern => pattern_for(options),
@@ -91,6 +93,8 @@ module Trenni
 				def textarea_attributes_for(options)
 					return {
 						:name => name_for(options),
+						:id => options[:id],
+						:class => options[:class],
 						:required => options[:required] ? true : false,
 						:placeholder => placeholder_for(options),
 					}
@@ -99,6 +103,8 @@ module Trenni
 				def checkbox_attributes_for(options)
 					return {
 						:type => options[:type] || 'checkbox',
+						:id => options[:id],
+						:class => options[:class],
 						:checked => options[:object].send(name),
 						:name => name_for(options),
 						:required => options[:required] ? true : false,
@@ -109,6 +115,8 @@ module Trenni
 				def submit_attributes_for(options)
 					return {
 						:type => options[:type] || 'submit',
+						:id => options[:id],
+						:class => options[:class],
 						:name => name_for(options),
 						:value => title_for(options),
 					}
@@ -117,6 +125,8 @@ module Trenni
 				def hidden_attributes_for(options)
 					return {
 						:type => options[:type] || 'hidden',
+						:id => options[:id],
+						:class => options[:class],
 						:name => name_for(options),
 						:value => value_for(options),
 					}

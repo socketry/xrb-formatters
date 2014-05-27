@@ -83,9 +83,8 @@ module Trenni
 						:step => options[:step],
 					}
 					
-					if explicit_attributes = options[:attributes]
-						attributes.update(explicit_attributes)
-					end
+					return attributes
+				end
 					
 					return attributes
 				end

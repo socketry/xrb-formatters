@@ -74,7 +74,9 @@ module Trenni
 						:id => options[:id],
 						:class => options[:class],
 						:value => value_for(options),
-						:required => options[:required] ? true : false,
+						:required => options[:required],
+						:disabled => options[:disabled],
+						:readonly => options[:readonly],
 						:pattern => pattern_for(options),
 						:placeholder => placeholder_for(options),
 						# for <input type="range|number">
@@ -103,7 +105,9 @@ module Trenni
 						:name => name_for(options),
 						:id => options[:id],
 						:class => options[:class],
-						:required => options[:required] ? true : false,
+						:required => options[:required],
+						:disabled => options[:disabled],
+						:readonly => options[:readonly],
 						:placeholder => placeholder_for(options),
 					}
 				end
@@ -115,7 +119,9 @@ module Trenni
 						:class => options[:class],
 						:checked => options[:object].send(name),
 						:name => name_for(options),
-						:required => options[:required] ? true : false,
+						:required => options[:required],
+						:disabled => options[:disabled],
+						:readonly => options[:readonly],
 						:value => 'true',
 					}
 				end
@@ -125,6 +131,7 @@ module Trenni
 						:type => options[:type] || 'submit',
 						:id => options[:id],
 						:class => options[:class],
+						:disabled => options[:disabled],
 						:name => name_for(options),
 						:value => title_for(options),
 					}

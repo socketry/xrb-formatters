@@ -49,11 +49,9 @@ module Trenni::Formatters::FormFormatterSpec
 	end
 	
 	describe "<input>" do
+		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
+		
 		it "should support support min, max and step" do
-			object = double(:bar => 10)
-			
-			formatter = FormFormatter.new(:object => object)
-			
 			attributes = formatter.input_attributes_for(:min => 10, :max => 20, :step => 2)
 			
 			expect(attributes[:min]).to be == 10
@@ -62,6 +60,20 @@ module Trenni::Formatters::FormFormatterSpec
 			
 			output_tag = formatter.input(:field => :bar, :min => 10)
 			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10" min="10"/></dd>}
+		end
+		
+		it "should not specify required, readonly or disabled" do
+			attributes = formatter.input_attributes_for(:field => :bar)
+			expect(attributes[:required]).to be nil
+			expect(attributes[:readonly]).to be nil
+			expect(attributes[:disabled]).to be nil
+		end
+		
+		it "should specify required, readonly or disabled" do
+			attributes = formatter.input_attributes_for(:field => :bar, :required => true, :readonly => true, :disabled => true)
+			expect(attributes[:required]).to be true
+			expect(attributes[:readonly]).to be true
+			expect(attributes[:disabled]).to be true
 		end
 	end
 end

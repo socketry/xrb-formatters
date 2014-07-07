@@ -49,12 +49,6 @@ module Trenni
 			def for(klass, &block)
 				@formatters[klass] = block
 			end
-
-			protected
-
-			def merged_options(options = {})
-				@options.merge(options)
-			end
 		end
 	end
 end

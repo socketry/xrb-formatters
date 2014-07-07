@@ -49,7 +49,7 @@ module Trenni::Formatters::FormFormatterSpec
 	end
 	
 	describe "<input>" do
-		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
+		let(:formatter) {FormFormatter.new(:object => double(bar: 10, bob: true, dole: false))}
 		
 		it "should support support min, max and step" do
 			attributes = formatter.input_attributes_for(:min => 10, :max => 20, :step => 2)
@@ -74,6 +74,22 @@ module Trenni::Formatters::FormFormatterSpec
 			expect(attributes[:required]).to be true
 			expect(attributes[:readonly]).to be true
 			expect(attributes[:disabled]).to be true
+		end
+		
+		it "should generate checked checkbox" do
+			attributes = formatter.checkbox_attributes_for(:value => true)
+			expect(attributes[:checked]).to be true
+			
+			output_tag = formatter.checkbox(:field => :bob)
+			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="bob" value="false"/>\t<input type="checkbox" name="bob" value="true" checked/>\tBob\n</dd>}
+		end
+		
+		it "should generate unchecked checkbox" do
+			attributes = formatter.checkbox_attributes_for(:value => false)
+			expect(attributes[:checked]).to be nil
+			
+			output_tag = formatter.checkbox(:field => :dole)
+			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\t<input type="checkbox" name="dole" value="true"/>\tDole\n</dd>}
 		end
 	end
 end

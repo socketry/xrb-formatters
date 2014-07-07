@@ -45,18 +45,20 @@ module Trenni
 					Strings::to_html(title)
 				end
 
+				def object_value_for(options)
+					options[:object].send(field_for(options)) if options[:object]
+				end
+
+				def raw_value_for(options)
+					value = options.fetch(:value) { object_value_for(options) }
+					
+					# Allow to specify a default value if the value given, usually from an object, is nil.
+					value || options[:default]
+				end
+
 				# The value of the field.
 				def value_for(options)
-					value = options[:value]
-
-					if options[:object]
-						value ||= options[:object].send(field_for(options))
-					end
-
-					# Allow to specify a default value if the value given, usually from an object, is nil.
-					value ||= options[:default]
-
-					self.format(value, options)
+					self.format(raw_value_for(options), options)
 				end
 
 				def pattern_for(options)
@@ -117,12 +119,12 @@ module Trenni
 						:type => options[:type] || 'checkbox',
 						:id => options[:id],
 						:class => options[:class],
-						:checked => options[:object].send(name),
 						:name => name_for(options),
+						:value => 'true',
+						:checked => raw_value_for(options),
 						:required => options[:required],
 						:disabled => options[:disabled],
 						:readonly => options[:readonly],
-						:value => 'true',
 					}
 				end
 

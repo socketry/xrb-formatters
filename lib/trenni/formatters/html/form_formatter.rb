@@ -96,6 +96,9 @@ module Trenni
 						:min => options[:min],
 						:max => options[:max],
 						:step => options[:step],
+						# for <input type="text">
+						:minlength => options[:minlength],
+						:maxlength => options[:maxlength],
 					}
 					
 					return attributes
@@ -122,6 +125,8 @@ module Trenni
 						:disabled => options[:disabled],
 						:readonly => options[:readonly],
 						:placeholder => placeholder_for(options),
+						:minlength => options[:minlength],
+						:maxlength => options[:maxlength],
 					}
 				end
 

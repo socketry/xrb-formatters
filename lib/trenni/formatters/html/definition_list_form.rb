@@ -85,9 +85,9 @@ module Trenni
 				# A submission button
 				def submit(options = {})
 					options = @options.merge(options)
-
-					unless options[:field]
-						options[:title] ||= self.object.saved? ? 'Update' : 'Create'
+					
+					unless title = title_for(options)
+						options[:title] ||= new_record? ? 'Create' : 'Update'
 					end
 
 					Builder.fragment do |builder|

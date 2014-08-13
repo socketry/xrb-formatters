@@ -31,20 +31,21 @@ module Trenni::Formatters::FormFormatterSpec
 	end
 	
 	describe Trenni::Formatters do
+		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
+		
 		it "should generate form" do
-			object = double(:bar => 10)
-			
-			formatter = FormFormatter.new(:object => object)
-			
 			output_tag = formatter.input(:field => :bar)
 			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
 		end
 		
 		it "should have default value" do
-			formatter = FormFormatter.new
-			
 			expect(formatter.value_for(:value => 10)).to be == "10"
 			expect(formatter.value_for(:value => nil, :default => 10)).to be == "10"
+		end
+		
+		it "should have a different title" do
+			output_tag = formatter.input(:field => :bar, :title => "Title")
+			expect(output_tag).to be == %Q{<dt>Title</dt>\n<dd><input name="bar" value="10"/></dd>}
 		end
 	end
 	

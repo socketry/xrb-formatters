@@ -29,6 +29,15 @@ module Trenni
 					@options[:object]
 				end
 
+				# Return true if the object is begin created or false if it is being updated.
+				def new_record?
+					if object.respond_to? :new_record?
+						return object.new_record?
+					elsif self.object.respond_to? :saved?
+						return !object.saved?
+					end
+				end
+
 				# The name of the field, used for the name attribute of an input.
 				def name_for(options)
 					options[:name] || options[:field]
@@ -37,12 +46,14 @@ module Trenni
 				def field_for(options)
 					options[:field]
 				end
-
-				# The human presentable title for the field.
+				
+				# A title is a text string that will be displayed next to or on top of the control to describe it or its value:
 				def title_for(options)
-					title = options[:title] || Strings::to_title(options[:field].to_s)
+					title = options[:title]
+					return Strings::to_html(title) if title
 					
-					Strings::to_html(title)
+					field_name = field_for(options)
+					return Strings::to_title(field_name.to_s) if field_name
 				end
 
 				def object_value_for(options)
@@ -131,10 +142,10 @@ module Trenni
 				def submit_attributes_for(options)
 					return {
 						:type => options[:type] || 'submit',
+						:name => name_for(options),
 						:id => options[:id],
 						:class => options[:class],
 						:disabled => options[:disabled],
-						:name => name_for(options),
 						:value => title_for(options),
 					}
 				end

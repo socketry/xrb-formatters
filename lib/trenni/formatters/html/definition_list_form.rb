@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 require 'trenni/builder'
+require 'trenni/template'
 
 require_relative 'form_formatter'
 

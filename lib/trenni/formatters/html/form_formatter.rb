@@ -124,6 +124,7 @@ module Trenni
 						:required => options[:required],
 						:disabled => options[:disabled],
 						:readonly => options[:readonly],
+						:pattern => pattern_for(options),
 						:placeholder => placeholder_for(options),
 						:minlength => options[:minlength],
 						:maxlength => options[:maxlength],

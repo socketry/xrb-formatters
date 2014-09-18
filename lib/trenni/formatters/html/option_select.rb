@@ -57,6 +57,8 @@ module Trenni
 					return {
 						:value => value_for(options),
 						:selected => options.fetch(:selected){ value_for(@options) == value_for(options) },
+						:id => options[:id],
+						:class => options[:class],
 					}
 				end
 
@@ -70,7 +72,9 @@ module Trenni
 
 				def group_attributes_for(options)
 					return {
-						:label => title_for(options)
+						:label => title_for(options),
+						:id => options[:id],
+						:class => options[:class],
 					}
 				end
 
@@ -88,7 +92,9 @@ module Trenni
 
 				def select_attributes_for(options)
 					return {
-						:name => name_for(options)
+						:name => name_for(options),
+						:id => options[:id],
+						:class => options[:class],
 					}
 				end
 

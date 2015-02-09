@@ -95,6 +95,7 @@ module Trenni
 						:name => name_for(options),
 						:id => options[:id],
 						:class => options[:class],
+						:multiple => options[:multiple]
 					}
 				end
 

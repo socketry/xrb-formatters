@@ -40,7 +40,7 @@ module Trenni
 
 				# The name of the field, used for the name attribute of an input.
 				def name_for(options)
-					options[:name] || options[:field]
+					(options[:name] || options[:field]).to_s
 				end
 				
 				def field_for(options)

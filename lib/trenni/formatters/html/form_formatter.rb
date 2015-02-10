@@ -53,7 +53,9 @@ module Trenni
 					return Strings::to_html(title) if title
 					
 					field_name = field_for(options)
-					return Strings::to_title(field_name.to_s) if field_name
+					
+					# Remove postfix "_id" or "_ids":
+					return Strings::to_title(field_name.to_s.sub(/_ids?/, '')) if field_name
 				end
 
 				def object_value_for(options)

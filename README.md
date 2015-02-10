@@ -8,6 +8,8 @@ Formatters are designed to be customised, typically per-project, for specific
 formatting needs.
 
 [![Build Status](https://travis-ci.org/ioquatix/trenni-formatters.svg?branch=master)](https://travis-ci.org/ioquatix/trenni-formatters)
+[![Code Climate](https://codeclimate.com/github/ioquatix/trenni-formatters.png)](https://codeclimate.com/github/ioquatix/trenni-formatters)
+[![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-formatters/badge.svg)](https://coveralls.io/r/ioquatix/trenni-formatters)
 
 ## Installation
 

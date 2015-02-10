@@ -3,3 +3,4 @@ rvm:
   - "1.9"
   - "2.0"
   - "2.1"
+env: COVERAGE=true

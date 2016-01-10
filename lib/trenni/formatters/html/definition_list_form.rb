@@ -87,7 +87,9 @@ module Trenni
 				def submit(options = {})
 					options = @options.merge(options)
 					
-					unless title = title_for(options)
+					if title = title_for(options)
+						options[:title] = title
+					else
 						options[:title] ||= new_record? ? 'Create' : 'Update'
 					end
 

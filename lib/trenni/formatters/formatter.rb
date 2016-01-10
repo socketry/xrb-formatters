@@ -30,7 +30,7 @@ module Trenni
 
 			def format(object, options = {})
 				if formatter = @formatters[object.class]
-					@formatters[object.class].call(object, options)
+					formatter.call(object, options)
 				else
 					if object
 						Strings::to_html(object.to_s)

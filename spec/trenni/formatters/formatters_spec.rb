@@ -38,7 +38,7 @@ module Trenni::FormattersSpec
 	end
 	
 	describe Trenni::Formatters do
-		let(:test_formatter) {TestFormatter.new}
+		let(:test_formatter) {TestFormatter.new(foo: :bar)}
 	
 		it "should format string" do
 			expect(test_formatter.format("foobar")).to be == "String: foobar"
@@ -48,6 +48,10 @@ module Trenni::FormattersSpec
 		it "should format numbers" do
 			expect(test_formatter.format(10)).to be == "10"
 			expect(test_formatter.count).to be == 0
+		end
+		
+		it "has options" do
+			expect(test_formatter[:foo]).to be == :bar
 		end
 	end
 end

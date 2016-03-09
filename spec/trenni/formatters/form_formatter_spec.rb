@@ -91,4 +91,18 @@ module Trenni::Formatters::FormFormatterSpec
 			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\n\t<label><input type="checkbox" name="dole" value="true"/> Dole</label>\n</dd>}
 		end
 	end
+	
+	describe "<output>" do
+		let(:formatter) {FormFormatter.new(:object => double(bar: 10, bob: true, dole: false))}
+		
+		it "should show output value" do
+			result = formatter.output(:field => :bar)
+			expect(result).to be == %Q{<dt>Bar</dt>\n<dd><output name=\"bar\">10</output></dd>}
+		end
+		
+		it "should show output value" do
+			result = formatter.output(:name => :total)
+			expect(result).to be == %Q{<dt></dt>\n<dd><output name=\"total\"></output></dd>}
+		end
+	end
 end

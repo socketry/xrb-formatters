@@ -64,7 +64,9 @@ module Trenni
 				end
 
 				def object_value_for(options)
-					options[:object].send(field_for(options)) if options[:object]
+					if object = options[:object] and field = field_for(options)
+						object.send(field)
+					end
 				end
 
 				def raw_value_for(options)

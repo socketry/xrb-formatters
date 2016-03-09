@@ -56,7 +56,9 @@ module Trenni
 						builder.inline(:dt) { builder.text title_for(options) }
 
 						builder.inline(:dd) do
-							builder.tag :output, output_attributes_for(options)
+							builder.inline :output, output_attributes_for(options) do
+								builder.text value_for(options)
+							end
 						end
 					end
 				end

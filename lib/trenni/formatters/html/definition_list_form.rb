@@ -77,9 +77,11 @@ module Trenni
 					Builder.fragment do |builder|
 						builder.tag(:dd) do
 							builder.tag :input, :type => :hidden, :name => name_for(options), :value => 'false'
-							builder.tag :input, checkbox_attributes_for(options)
-							# We would like a little bit of whitespace between the checkbox and the title.
-							builder.text " " + title_for(options)
+							builder.inline(:label) do
+								builder.tag :input, checkbox_attributes_for(options)
+								# We would like a little bit of whitespace between the checkbox and the title.
+								builder.text " " + title_for(options)
+							end
 						end
 					end
 				end

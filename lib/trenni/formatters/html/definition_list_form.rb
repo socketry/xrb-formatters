@@ -34,8 +34,14 @@ module Trenni
 					options = @options.merge(options)
 
 					Builder.fragment do |builder|
-						builder.inline(:dt) { builder.text title_for(options) }
-
+						builder.inline(:dt) do
+							builder.text title_for(options)
+							
+							if details = details_for(options)
+								builder.inline(:small) { builder.text details }
+							end
+						end
+						
 						builder.inline(:dd) do
 							builder.tag :input, input_attributes_for(options)
 						end
@@ -60,7 +66,13 @@ module Trenni
 					options = @options.merge(options)
 
 					Builder.fragment do |builder|
-						builder.inline(:dt) { builder.text title_for(options) }
+						builder.tag(:dt) do
+								builder.text title_for(options)
+								
+								if details = details_for(options)
+									builder.inline(:small) { builder.text details }
+								end
+						end
 
 						builder.inline(:dd) do
 							builder.tag :textarea, textarea_attributes_for(options) do
@@ -106,7 +118,14 @@ module Trenni
 					buffer = Trenni::Template.buffer(block.binding)
 					
 					buffer << Builder.fragment do |builder|
-						builder.inline(:dt) { builder.text title_for(options) }
+						builder.inline(:dt) do
+							builder.text title_for(options)
+							
+							if details = details_for(options)
+								builder.inline(:small) { builder.text details }
+							end
+						end
+						
 						builder.tag(:dd) do
 							klass.call(self, options, builder, &block)
 						end

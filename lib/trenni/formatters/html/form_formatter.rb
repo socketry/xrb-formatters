@@ -37,7 +37,12 @@ module Trenni
 						return !object.saved?
 					end
 				end
-
+				
+				# Any additional details relating to a field (e.g. explanation text)
+				def details_for(options)
+					options[:details]
+				end
+				
 				# The name of the field, used for the name attribute of an input.
 				def name_for(options)
 					(options[:name] || options[:field]).to_s

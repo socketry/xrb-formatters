@@ -28,15 +28,19 @@ module Trenni
 				@formatters = {}
 			end
 
+			def format_unspecified(object, options)
+				if object
+					Strings::to_html(object.to_s)
+				else
+					options[:blank] || ""
+				end
+			end
+
 			def format(object, options = {})
 				if formatter = @formatters[object.class]
 					formatter.call(object, options)
 				else
-					if object
-						Strings::to_html(object.to_s)
-					else
-						options[:blank] || ""
-					end
+					format_unspecified(object, options)
 				end
 			end
 

@@ -32,8 +32,8 @@ module Trenni::Formatters::FormFormatterSpec
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
 		it "should generate form" do
-			output_tag = formatter.input(:field => :bar)
-			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
+			result = formatter.input(:field => :bar)
+			expect(result).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10"/></dd>}
 		end
 		
 		it "should have default value" do
@@ -42,8 +42,8 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 		
 		it "should have a different title" do
-			output_tag = formatter.input(:field => :bar, :title => "Title")
-			expect(output_tag).to be == %Q{<dt>Title</dt>\n<dd><input name="bar" value="10"/></dd>}
+			result = formatter.input(:field => :bar, :title => "Title")
+			expect(result).to be == %Q{<dt>Title</dt>\n<dd><input name="bar" value="10"/></dd>}
 		end
 	end
 	
@@ -57,8 +57,8 @@ module Trenni::Formatters::FormFormatterSpec
 			expect(attributes[:max]).to be == 20
 			expect(attributes[:step]).to be == 2
 			
-			output_tag = formatter.input(:field => :bar, :min => 10)
-			expect(output_tag).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10" min="10"/></dd>}
+			result = formatter.input(:field => :bar, :min => 10)
+			expect(result).to be == %Q{<dt>Bar</dt>\n<dd><input name="bar" value="10" min="10"/></dd>}
 		end
 		
 		it "should not specify required, readonly or disabled" do
@@ -79,16 +79,16 @@ module Trenni::Formatters::FormFormatterSpec
 			attributes = formatter.checkbox_attributes_for(:value => true)
 			expect(attributes[:checked]).to be true
 			
-			output_tag = formatter.checkbox(:field => :bob)
-			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="bob" value="false"/>\n\t<label><input type="checkbox" name="bob" value="true" checked/> Bob</label>\n</dd>}
+			result = formatter.checkbox(:field => :bob)
+			expect(result).to be == %Q{<dd>\n\t<input type="hidden" name="bob" value="false"/>\n\t<label><input type="checkbox" name="bob" value="true" checked/> Bob</label>\n</dd>}
 		end
 		
 		it "should generate unchecked checkbox" do
 			attributes = formatter.checkbox_attributes_for(:value => false)
 			expect(attributes[:checked]).to be nil
 			
-			output_tag = formatter.checkbox(:field => :dole)
-			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\n\t<label><input type="checkbox" name="dole" value="true"/> Dole</label>\n</dd>}
+			result = formatter.checkbox(:field => :dole)
+			expect(result).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\n\t<label><input type="checkbox" name="dole" value="true"/> Dole</label>\n</dd>}
 		end
 	end
 	

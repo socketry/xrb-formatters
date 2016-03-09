@@ -85,7 +85,7 @@ module Trenni
 				end
 
 				def group(options = {}, &block)
-					Builder.fragment do |builder|
+					Builder.fragment(@builder) do |builder|
 						builder.tag :optgroup, group_attributes_for(options) do
 							if options[:optional]
 								item(:title => '', :value => '', :builder => builder)

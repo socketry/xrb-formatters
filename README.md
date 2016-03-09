@@ -11,19 +11,23 @@ formatting needs.
 [![Code Climate](https://codeclimate.com/github/ioquatix/trenni-formatters.png)](https://codeclimate.com/github/ioquatix/trenni-formatters)
 [![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-formatters/badge.svg)](https://coveralls.io/r/ioquatix/trenni-formatters)
 
+## Motivation
+
+`Trenni::Formatters` was a library extracted from [Financier](https://github.com/ioquatix/financier) which is a CouchDB backed invoicing system, itself, derived from an old Rails app. I was a bit envious of `form_for` in terms of the ease of generating forms, but found that it wasn't very extendable. I also found myself generating code to format model data as rich HTML. `Trenni::Formatters` attempts to be an easily extendable formatting module which can generate rich text, links and HTML.
+
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'trenni-formatters'
+	gem 'trenni-formatters'
 
 And then execute:
 
-    $ bundle
+	$ bundle
 
 Or install it yourself as:
 
-    $ gem install trenni-formatters
+	$ gem install trenni-formatters
 
 ## Usage
 
@@ -36,9 +40,9 @@ a mapping corresponding to the objects type:
 		"String: #{value}"
 	end
 		
-	assert_equal "String: foobar", formatter.format("foobar")
+	expect(formatter.format("foobar")).to be == "String: foobar"
 
-For more examples please see `test/`.
+For more examples please see `spec/`.
 
 ## Contributing
 

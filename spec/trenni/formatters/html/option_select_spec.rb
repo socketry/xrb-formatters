@@ -31,10 +31,9 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 	
 	describe Trenni::Formatters::HTML::OptionSelect do
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
+		let(:_out) {Array.new}
 		
-		it "should format items" do
-			_out = []
-			
+		it "should list items" do
 			formatter.select :field => :bar do |select|
 				_out << select.item(:title => "A", :value => 0)
 				_out << select.item(:title => "B", :value => 10)
@@ -43,9 +42,36 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
-		it "should format groups" do
-			_out = []
+		it "should list items for multiple selection" do
+			formatter.select :field => :bar, multiple: true do |select|
+				_out << select.item(:title => "A", :value => 0)
+				_out << select.item(:title => "B", :value => 10)
+			end
 			
+			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar[]\" multiple>\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+		end
+		
+		it "should add optional item" do
+			formatter.select :field => :bar, optional: true do |select|
+				_out << select.item(:title => "A", :value => 0)
+				_out << select.item(:title => "B", :value => 10)
+			end
+			
+			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"\"></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+		end
+		
+		it "should add optional item in group" do
+			formatter.select :field => :bar do |select|
+				select.group(title: 'group', optional: true) do
+					_out << select.item(:title => "A", :value => 0)
+				end
+				_out << select.item(:title => "B", :value => 10)
+			end
+			
+			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"\"></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+		end
+		
+		it "should add a group" do
 			formatter.select :field => :bar do |select|
 				select.group(title: 'group') do
 					_out << select.item(:title => "A", :value => 0)

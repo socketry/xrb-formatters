@@ -97,7 +97,6 @@ module Trenni
 					end
 				end
 			end
-
 		end
 	end
 end

@@ -19,13 +19,13 @@
 # THE SOFTWARE.
 
 require 'trenni/strings'
+require 'mapping/model'
 
 module Trenni
 	module Formatters
-		class Formatter
+		class Formatter < Mapping::Model
 			def initialize(options = {})
 				@options = options
-				@formatters = {}
 			end
 
 			def format_unspecified(object, options)
@@ -37,8 +37,10 @@ module Trenni
 			end
 
 			def format(object, options = {})
-				if formatter = @formatters[object.class]
-					formatter.call(object, options)
+				method_name = self.method_for_mapping(object)
+				
+				if self.respond_to?(method_name)
+					self.send(method_name, object, options)
 				else
 					format_unspecified(object, options)
 				end
@@ -48,10 +50,6 @@ module Trenni
 
 			def [] key
 				@options[key]
-			end
-
-			def for(klass, &block)
-				@formatters[klass] = block
 			end
 		end
 	end

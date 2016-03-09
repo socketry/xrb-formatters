@@ -92,6 +92,25 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
+	describe "<textarea>" do
+		let(:formatter) {FormFormatter.new(:object => double(details: "foo<bar>"))}
+		
+		it "should escape characters correctly" do
+			result = formatter.textarea(:field => :details)
+			expect(result).to be == %Q{<dt>\n\tDetails\n</dt>\n<dd><textarea name=\"details\">foo&lt;bar&gt;</textarea></dd>}
+		end
+	end
+	
+	describe '<input type="submit">' do
+		let(:new_record_formatter) {FormFormatter.new(:object => double(new_record?: true))}
+		let(:formatter) {FormFormatter.new(:object => double(new_record?: false))}
+		
+		it "should escape characters correctly" do
+			result = formatter.submit
+			expect(result).to be == %Q{<input type="submit" value="Update"/>}
+		end
+	end
+	
 	describe "<output>" do
 		let(:formatter) {FormFormatter.new(:object => double(bar: 10, bob: true, dole: false))}
 		

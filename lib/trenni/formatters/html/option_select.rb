@@ -42,13 +42,13 @@ module Trenni
 				end
 
 				def name_for(options)
-					name = @formatter.name_for(options)
-					
-					if options[:multiple]
-						name += '[]'
+					if name = @formatter.name_for(options)
+						if options[:multiple]
+							name = "#{name}[]"
+						end
+						
+						return name
 					end
-					
-					return name
 				end
 
 				def value_for(options)

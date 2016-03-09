@@ -80,7 +80,7 @@ module Trenni::Formatters::FormFormatterSpec
 			expect(attributes[:checked]).to be true
 			
 			output_tag = formatter.checkbox(:field => :bob)
-			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="bob" value="false"/>\t<input type="checkbox" name="bob" value="true" checked/>\tBob\n</dd>}
+			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="bob" value="false"/>\t<input type="checkbox" name="bob" value="true" checked/>\t Bob\n</dd>}
 		end
 		
 		it "should generate unchecked checkbox" do
@@ -88,7 +88,7 @@ module Trenni::Formatters::FormFormatterSpec
 			expect(attributes[:checked]).to be nil
 			
 			output_tag = formatter.checkbox(:field => :dole)
-			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\t<input type="checkbox" name="dole" value="true"/>\tDole\n</dd>}
+			expect(output_tag).to be == %Q{<dd>\n\t<input type="hidden" name="dole" value="false"/>\t<input type="checkbox" name="dole" value="true"/>\t Dole\n</dd>}
 		end
 	end
 end

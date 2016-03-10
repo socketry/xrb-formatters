@@ -92,12 +92,22 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe "<textarea>" do
-		let(:formatter) {FormFormatter.new(:object => double(details: "foo<bar>"))}
+	describe '<input type="hidden">' do
+		let(:formatter) {FormFormatter.new(:object => double(age: 20))}
+		
+		it "should generate hidden field" do
+			result = formatter.hidden(:field => :age)
+			expect(result).to be == %Q{<input type="hidden" name="age" value="20"/>}
+		end
 		
 		it "should escape characters correctly" do
-			result = formatter.textarea(:field => :details)
-			expect(result).to be == %Q{<dt>\n\tDetails\n</dt>\n<dd><textarea name=\"details\">foo&lt;bar&gt;</textarea></dd>}
+			result = formatter.submit
+			expect(result).to be == %Q{<input type="submit" value="Update"/>}
+		end
+		
+		it "can have custom title" do
+			result = formatter.submit(title: 'Alice')
+			expect(result).to be == %Q{<input type="submit" value="Alice"/>}
 		end
 	end
 	
@@ -105,9 +115,28 @@ module Trenni::Formatters::FormFormatterSpec
 		let(:new_record_formatter) {FormFormatter.new(:object => double(new_record?: true))}
 		let(:formatter) {FormFormatter.new(:object => double(new_record?: false))}
 		
+		it "should have correct title for new_record?" do
+			result = new_record_formatter.submit
+			expect(result).to be == %Q{<input type="submit" value="Create"/>}
+		end
+		
 		it "should escape characters correctly" do
 			result = formatter.submit
 			expect(result).to be == %Q{<input type="submit" value="Update"/>}
+		end
+		
+		it "can have custom title" do
+			result = formatter.submit(title: 'Alice')
+			expect(result).to be == %Q{<input type="submit" value="Alice"/>}
+		end
+	end
+	
+	describe "<textarea>" do
+		let(:formatter) {FormFormatter.new(:object => double(details: "foo<bar>"))}
+		
+		it "should escape characters correctly" do
+			result = formatter.textarea(:field => :details)
+			expect(result).to be == %Q{<dt>\n\tDetails\n</dt>\n<dd><textarea name=\"details\">foo&lt;bar&gt;</textarea></dd>}
 		end
 	end
 	
@@ -122,6 +151,15 @@ module Trenni::Formatters::FormFormatterSpec
 		it "should show output value" do
 			result = formatter.output(:name => :total)
 			expect(result).to be == %Q{<dt></dt>\n<dd><output name=\"total\"></output></dd>}
+		end
+	end
+	
+	describe "<button>" do
+		let(:formatter) {FormFormatter.new}
+		
+		it "should generate reset button" do
+			result = formatter.button(:type => :reset)
+			expect(result).to be == %Q{<button type="reset">Reset</button>}
 		end
 	end
 end

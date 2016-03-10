@@ -54,13 +54,15 @@ module Trenni
 				
 				# A title is a text string that will be displayed next to or on top of the control to describe it or its value:
 				def title_for(options)
-					title = options[:title]
-					return Strings::to_html(title) if title
+					if title = options[:title]
+						return title
+					end
 					
-					field_name = field_for(options)
-					
-					# Remove postfix "_id" or "_ids":
-					return Strings::to_title(field_name.to_s.sub(/_ids?/, '')) if field_name
+					# Generate a title from a field name:
+					if field_name = field_for(options)
+						# Remove postfix "_id" or "_ids":
+						return Strings::to_title(field_name.to_s.sub(/_ids?/, ''))
+					end
 				end
 
 				def object_value_for(options)
@@ -78,7 +80,9 @@ module Trenni
 
 				# The value of the field.
 				def value_for(options)
-					self.format(raw_value_for(options), options)
+					if value = raw_value_for(options)
+						self.format(value, options)
+					end
 				end
 
 				def pattern_for(options)
@@ -164,7 +168,11 @@ module Trenni
 						:value => title_for(options),
 					}
 				end
-
+				
+				def submit_title_for(options)
+					title_for(options) || (new_record? ? 'Create' : 'Update')
+				end
+				
 				def hidden_attributes_for(options)
 					return {
 						:type => options[:type] || 'hidden',
@@ -181,6 +189,38 @@ module Trenni
 
 					Builder.fragment do |builder|
 						builder.tag :input, hidden_attributes_for(options)
+					end
+				end
+				
+				def button_attributes_for(options)
+					return {
+						:type => options[:type] || 'submit',
+						:name => name_for(options),
+						:id => options[:id],
+						:class => options[:class],
+						:disabled => options[:disabled],
+						:value => value_for(options),
+					}
+				end
+				
+				def button_title_for(options)
+					type = options.fetch(:type, 'submit').to_sym
+					
+					if type == :submit
+						submit_title_for(options)
+					else
+						title_for(options) || Strings::to_title(type.to_s)
+					end
+				end
+				
+				# A hidden field.
+				def button(options = {})
+					options = @options.merge(options)
+
+					Builder.fragment do |builder|
+						builder.inline :button, button_attributes_for(options) do
+							builder.text button_title_for(options)
+						end
 					end
 				end
 			end

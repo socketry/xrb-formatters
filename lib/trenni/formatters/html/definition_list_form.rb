@@ -103,13 +103,8 @@ module Trenni
 				# A submission button
 				def submit(options = {})
 					options = @options.merge(options)
+					options[:title] ||= submit_title_for(options)
 					
-					if title = title_for(options)
-						options[:title] = title
-					else
-						options[:title] ||= new_record? ? 'Create' : 'Update'
-					end
-
 					Builder.fragment do |builder|
 						builder.tag :input, submit_attributes_for(options)
 					end

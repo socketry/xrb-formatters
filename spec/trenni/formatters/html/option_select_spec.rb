@@ -19,6 +19,7 @@
 # THE SOFTWARE.
 
 require 'trenni/formatters'
+require 'trenni/formatters/html/option_select'
 
 module Trenni::Formatters::HTML::OptionSelectSpec
 	class FormFormatter < Trenni::Formatters::Formatter

@@ -24,7 +24,7 @@ module Trenni
 	module Formatters
 		module HTML
 			# Table based select boxes using per-row checkboxes.
-			class TableSelect
+			class RadioSelect
 				def self.call(formatter, options, builder, &block)
 					instance = self.new(formatter, options, builder)
 					

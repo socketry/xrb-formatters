@@ -20,8 +20,6 @@
 
 require 'trenni/formatters'
 require 'trenni/formatters/html/definition_list_form'
-require 'trenni/formatters/html/option_select'
-require 'trenni/formatters/html/table_select'
 
 module Trenni::Formatters::FormFormatterSpec
 	class FormFormatter < Trenni::Formatters::Formatter

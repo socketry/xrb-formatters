@@ -112,6 +112,7 @@ module Trenni
 						# for <input type="text">
 						:minlength => options[:minlength],
 						:maxlength => options[:maxlength],
+						:data => options[:data],
 					}
 					
 					return attributes
@@ -124,6 +125,7 @@ module Trenni
 						:class => options[:class],
 						:for => options[:for],
 						:form => options[:form],
+						:data => options[:data],
 					}
 					
 					return attributes
@@ -141,6 +143,7 @@ module Trenni
 						:placeholder => placeholder_for(options),
 						:minlength => options[:minlength],
 						:maxlength => options[:maxlength],
+						:data => options[:data],
 					}
 				end
 
@@ -155,6 +158,7 @@ module Trenni
 						:required => options[:required],
 						:disabled => options[:disabled],
 						:readonly => options[:readonly],
+						:data => options[:data],
 					}
 				end
 
@@ -166,6 +170,7 @@ module Trenni
 						:class => options[:class],
 						:disabled => options[:disabled],
 						:value => title_for(options),
+						:data => options[:data],
 					}
 				end
 				
@@ -180,6 +185,7 @@ module Trenni
 						:class => options[:class],
 						:name => name_for(options),
 						:value => value_for(options),
+						:data => options[:data],
 					}
 				end
 
@@ -200,6 +206,7 @@ module Trenni
 						:class => options[:class],
 						:disabled => options[:disabled],
 						:value => value_for(options),
+						:data => options[:data],
 					}
 				end
 				

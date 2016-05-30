@@ -57,6 +57,7 @@ module Trenni
 						:name => @field,
 						:value => value_for(options),
 						:selected => options[:selected],
+						:data => options[:data],
 					}
 				end
 

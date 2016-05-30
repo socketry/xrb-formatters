@@ -65,6 +65,7 @@ module Trenni
 						:selected => options.fetch(:selected){ value_for(@options) == value_for(options) },
 						:id => options[:id],
 						:class => options[:class],
+						:data => options[:data],
 					}
 				end
 
@@ -81,6 +82,7 @@ module Trenni
 						:label => title_for(options),
 						:id => options[:id],
 						:class => options[:class],
+						:data => options[:data],
 					}
 				end
 
@@ -101,7 +103,8 @@ module Trenni
 						:name => name_for(options),
 						:id => options[:id],
 						:class => options[:class],
-						:multiple => options[:multiple]
+						:multiple => options[:multiple],
+						:data => options[:data],
 					}
 				end
 

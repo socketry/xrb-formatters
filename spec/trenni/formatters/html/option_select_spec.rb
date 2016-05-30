@@ -43,6 +43,14 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
+		it "should list items with data attributes" do
+			formatter.select :field => :bar do |select|
+				_out << select.item(:title => "A", :value => 0, :data => {foo: 'bar'})
+			end
+			
+			expect(_out.join).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\" data-foo=\"bar\">A</option>\n\t</select>\n</dd>"
+		end
+		
 		it "should list items for multiple selection" do
 			formatter.select :field => :bar, multiple: true do |select|
 				_out << select.item(:title => "A", :value => 0)

@@ -30,7 +30,7 @@ module Trenni
 
 			def format_unspecified(object, options)
 				if object
-					Strings::to_html(object.to_s)
+					object
 				else
 					options[:blank] || ""
 				end
@@ -43,7 +43,7 @@ module Trenni
 					self.send(method_name, object, options)
 				else
 					format_unspecified(object, options)
-				end
+				end.to_s
 			end
 
 			alias text format

@@ -34,14 +34,16 @@ module Trenni::Formatters::HTML::RadioSelectSpec
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
 		it "should list items" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar do |select|
 					_out << select.item(:title => "A", :value => 0)
 					_out << select.item(:title => "B", :value => 10)
 				end
 			end
 			
-			expect(_out).to be == %Q{<dt>Bar</dt>\n<dd>\n\t<table>\n\t\t<tbody>\n\t\t\t<tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="0"/></td>\n\t\t\t\t<td class="item">A</td>\n\t\t\t</tr><tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="10"/></td>\n\t\t\t\t<td class="item">B</td>\n\t\t\t</tr>\n\t\t</tbody>\n\t</table>\n</dd>}
+			expect(captured).to be == %Q{<dt>Bar</dt>\n<dd>\n\t<table>\n\t\t<tbody>\n\t\t\t<tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="0"/></td>\n\t\t\t\t<td class="item">A</td>\n\t\t\t</tr><tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="10"/></td>\n\t\t\t\t<td class="item">B</td>\n\t\t\t</tr>\n\t\t</tbody>\n\t</table>\n</dd>}
 		end
 	end
 end

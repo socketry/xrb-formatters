@@ -31,54 +31,75 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 		end
 	end
 	
+	def capture(&block)
+		_out = ""
+		
+		Trenni::Template.capture do
+			formatter.select :field => :bar do |select|
+				_out << select.item(:title => "A", :value => 0)
+				_out << select.item(:title => "B", :value => 10)
+			end
+		end
+	end
+	
 	describe Trenni::Formatters::HTML::OptionSelect do
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
 		it "should list items" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar do |select|
 					_out << select.item(:title => "A", :value => 0)
 					_out << select.item(:title => "B", :value => 10)
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should list items with data attributes" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar do |select|
 					_out << select.item(:title => "A", :value => 0, :data => {foo: 'bar'})
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\" data-foo=\"bar\">A</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\" data-foo=\"bar\">A</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should list items for multiple selection" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar, multiple: true do |select|
 					_out << select.item(:title => "A", :value => 0)
 					_out << select.item(:title => "B", :value => 10)
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar[]\" multiple>\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar[]\" multiple>\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should add optional item" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar, optional: true do |select|
 					_out << select.item(:title => "A", :value => 0)
 					_out << select.item(:title => "B", :value => 10)
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"\"></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"\"></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should add optional item in group" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar do |select|
 					select.group(title: 'group', optional: true) do
 						_out << select.item(:title => "A", :value => 0)
@@ -87,11 +108,13 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"\"></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"\"></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should add a group" do
-			_out = Trenni::Template.capture do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
 				formatter.select :field => :bar do |select|
 					select.group(title: 'group') do
 						_out << select.item(:title => "A", :value => 0)
@@ -100,7 +123,7 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(_out).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 	end
 end

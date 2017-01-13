@@ -62,7 +62,7 @@ module Trenni
 				end
 
 				def item(options = {}, &block)
-					fragment = Builder.fragment do |builder|
+					Builder.fragment do |builder|
 						builder.tag :tr do
 							builder.inline(:td, :class => :handle) do
 								builder.tag :input, radio_attributes_for(options)
@@ -76,16 +76,7 @@ module Trenni
 								end
 							end
 						end
-					end
-					
-					if block_given?
-						buffer = Trenni::buffer(block.binding)
-						buffer << fragment
-						
-						return nil
-					else
-						return fragment
-					end
+					end >> block
 				end
 
 				def call(options = {}, &block)

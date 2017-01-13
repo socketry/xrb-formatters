@@ -34,6 +34,8 @@ module Trenni
 				def initialize(formatter, options, builder)
 					@formatter = formatter
 					@object = formatter.object
+					
+					@options = options
 					@field = options[:field]
 					
 					@builder = builder
@@ -55,8 +57,9 @@ module Trenni
 					return {
 						:type => :radio,
 						:name => @field,
-						:value => value_for(options),
-						:selected => options[:selected],
+						# We set a default value to empty string, otherwise it becomes "on".
+						:value => value_for(options) || "",
+						:checked => options.fetch(:selected){ value_for(@options) == value_for(options) },
 						:data => options[:data],
 					}
 				end
@@ -67,7 +70,7 @@ module Trenni
 							builder.inline(:td, :class => :handle) do
 								builder.tag :input, radio_attributes_for(options)
 							end
-								
+							
 							builder.inline(:td, :class => :item) do
 								if block_given?
 									builder.append Trenni::Template.capture(self, &block)

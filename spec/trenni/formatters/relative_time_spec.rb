@@ -1,4 +1,4 @@
-# Copyright, 2012, by Samuel G. D. Williams. <http://www.codeotaku.com>
+# Copyright, 2017, by Samuel G. D. Williams. <http://www.codeotaku.com>
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -18,22 +18,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'trenni/strings'
-require 'mapping/model'
+require 'trenni/formatters/formatter'
+require 'trenni/formatters/relative_time'
 
-module Trenni::Formatters::Format
-	module Time
-		def included(base)
-			base.map(Time) do |object, options|
-				# Ensure we display the time in localtime, and show the year if it is different:
-				if object.localtime.year != Time.now.year
-					object.localtime.strftime("%B %-d, %-l:%M%P, %Y")
-				else
-					object.localtime.strftime("%B %-d, %-l:%M%P")
-				end
-			end
-			end
-		end
+describe Trenni::Formatters::RelativeTime do
+	subject {Class.new(Trenni::Formatters::Formatter).include(Trenni::Formatters::RelativeTime).new}
+	
+	let(:now) {Time.now}
+	let(:time_this_year) {Time.mktime(now.year, 1, 1)}
+	let(:time_last_year) {Time.mktime(now.year - 1, 1, 1)}
+	
+	it "should format without year" do
+		expect(subject.format(time_this_year, current_time: now)).to be == "January 1, 12:00am"
+	end
+	
+	it "should format with year" do
+		expect(subject.format(time_last_year, current_time: now)).to be == "January 1, 12:00am, #{time_last_year.year}"
 	end
 end
-

@@ -18,17 +18,24 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'sanitize'
-require 'kramdown'
+require 'trenni/strings'
+require 'mapping/model'
 
-module Trenni::Formatters::Format
-	module Markdown
-		def markdown(text)
-			config = Sanitize::Config::BASIC.dup
-			
-			config[:elements] += ['h1', 'h2', 'h3']
-			
-			Sanitize.clean(Kramdown::Document.new(text).to_html, config)
+module Trenni
+	module Formatters
+		module RelativeTime
+			def self.included(base)
+				base.map(Time) do |object, options|
+					current_time = options.fetch(:current_time) {Time.now}
+					
+					# Ensure we display the time in localtime, and show the year if it is different:
+					if object.localtime.year != current_time.year
+						object.localtime.strftime("%B %-d, %-l:%M%P, %Y")
+					else
+						object.localtime.strftime("%B %-d, %-l:%M%P")
+					end
+				end
+			end
 		end
 	end
 end

@@ -93,7 +93,7 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"\"></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should add optional item in group" do
@@ -108,7 +108,7 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"\"></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
 		end
 		
 		it "should add a group" do

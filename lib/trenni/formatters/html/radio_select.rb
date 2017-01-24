@@ -44,6 +44,14 @@ module Trenni
 				def name_for(options)
 					@formatter.name_for(options)
 				end
+				
+				def raw_value_for(options)
+					@formatter.raw_value_for(options)
+				end
+
+				def raw_value
+					@raw_value ||= raw_value_for(@options)
+				end
 
 				def value_for(options)
 					@formatter.value_for(options)
@@ -59,7 +67,7 @@ module Trenni
 						:name => @field,
 						# We set a default value to empty string, otherwise it becomes "on".
 						:value => value_for(options) || "",
-						:checked => options.fetch(:selected){ value_for(@options) == value_for(options) },
+						:checked => options.fetch(:selected){ raw_value == raw_value_for(options) },
 						:data => options[:data],
 					}
 				end

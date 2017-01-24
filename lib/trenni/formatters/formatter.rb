@@ -27,13 +27,11 @@ module Trenni
 			def initialize(options = {})
 				@options = options
 			end
+			
+			attr :options
 
 			def format_unspecified(object, options)
-				if object
-					object
-				else
-					options[:blank] || ""
-				end
+				object.to_s
 			end
 
 			def format(object, options = {})
@@ -43,13 +41,27 @@ module Trenni
 					self.send(method_name, object, options)
 				else
 					format_unspecified(object, options)
-				end.to_s
+				end
 			end
 
 			alias text format
 
 			def [] key
 				@options[key]
+			end
+			
+			map(String) do |object, options|
+				object
+			end
+			
+			map(NilClass) do |object, options|
+				options[:blank] || @options[:blank] || ""
+			end
+			
+			[TrueClass, FalseClass, Fixnum, Bignum, Float, Rational].each do |klass|
+				map(klass) do |object, options|
+					object.to_s
+				end
 			end
 		end
 	end

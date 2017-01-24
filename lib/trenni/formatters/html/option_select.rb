@@ -51,6 +51,14 @@ module Trenni
 					end
 				end
 
+				def raw_value_for(options)
+					@formatter.raw_value_for(options)
+				end
+
+				def raw_value
+					@raw_value ||= raw_value_for(@options)
+				end
+
 				def value_for(options)
 					@formatter.value_for(options)
 				end
@@ -62,7 +70,7 @@ module Trenni
 				def option_attributes_for(options)
 					return {
 						:value => value_for(options),
-						:selected => options.fetch(:selected){ value_for(@options) == value_for(options) },
+						:selected => options.fetch(:selected){ raw_value == raw_value_for(options) },
 						:id => options[:id],
 						:class => options[:class],
 						:data => options[:data],

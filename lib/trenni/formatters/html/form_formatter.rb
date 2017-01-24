@@ -26,16 +26,12 @@ module Trenni
 			module FormFormatter
 				# The target object of the form.
 				def object
-					@options[:object]
+					@object ||= @options[:object]
 				end
 
 				# Return true if the object is begin created or false if it is being updated.
 				def new_record?
-					if object.respond_to? :new_record?
-						return object.new_record?
-					elsif self.object.respond_to? :saved?
-						return !object.saved?
-					end
+					object.new_record?
 				end
 				
 				# Any additional details relating to a field (e.g. explanation text)

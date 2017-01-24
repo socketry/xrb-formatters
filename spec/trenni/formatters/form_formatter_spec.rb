@@ -99,6 +99,8 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 		
 		it "should escape characters correctly" do
+			expect(formatter.object).to receive(:new_record?).and_return(false)
+			
 			result = formatter.submit
 			expect(result).to be == %Q{<input type="submit" value="Update"/>}
 		end

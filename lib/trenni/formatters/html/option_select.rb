@@ -77,11 +77,19 @@ module Trenni
 					}
 				end
 
-				def item(options = {})
+				def item(builder: nil, **options)
 					options[:field] ||= 'id'
 					
-					Builder.fragment(options[:builder]) do |builder|
+					Builder.fragment(builder) do |builder|
 						builder.inline(:option, option_attributes_for(options)) { builder.text title_for(options) }
+					end
+				end
+
+				def optional_title_for(options)
+					if options[:optional] == true
+						options[:blank] || ''
+					else
+						options[:optional]
 					end
 				end
 
@@ -98,7 +106,7 @@ module Trenni
 					Builder.fragment(@builder) do |builder|
 						builder.tag :optgroup, group_attributes_for(options) do
 							if options[:optional]
-								item(:title => '', :value => '', :builder => builder)
+								item(:title => optional_title_for(options), :value => nil, :builder => builder)
 							end
 							
 							builder.append Trenni::Template.capture(&block)
@@ -120,7 +128,7 @@ module Trenni
 					Builder.fragment(@builder) do |builder|
 						builder.tag :select, select_attributes_for(options) do
 							if options[:optional]
-								item(:title => '', :value => '', :builder => builder)
+								item(:title => optional_title_for(options), :value => nil, :builder => builder)
 							end
 							
 							builder.append Trenni::Template.capture(self, &block)

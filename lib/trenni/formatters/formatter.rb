@@ -20,6 +20,7 @@
 
 require 'trenni/strings'
 require 'mapping/model'
+require 'mapping/descendants'
 
 module Trenni
 	module Formatters
@@ -58,10 +59,8 @@ module Trenni
 				options[:blank] || @options[:blank] || ""
 			end
 			
-			[TrueClass, FalseClass, Fixnum, Bignum, Float, Rational].each do |klass|
-				map(klass) do |object, options|
-					object.to_s
-				end
+			map(TrueClass, FalseClass, *Mapping.lookup_descendants(Numeric)) do |object, options|
+				object.to_s
 			end
 		end
 	end

@@ -136,7 +136,7 @@ module Trenni::Formatters::FormFormatterSpec
 		
 		it "should escape characters correctly" do
 			result = formatter.textarea(:field => :details)
-			expect(result).to be == %Q{<dt>\n\tDetails\n</dt>\n<dd><textarea name=\"details\">foo&lt;bar&gt;</textarea></dd>}
+			expect(result).to be == %Q{<dt>\nDetails</dt>\n<dd><textarea name=\"details\">foo&lt;bar&gt;</textarea></dd>}
 		end
 	end
 	

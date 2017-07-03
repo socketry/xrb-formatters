@@ -81,7 +81,7 @@ module Trenni
 							
 							builder.inline(:td, :class => :item) do
 								if block_given?
-									builder.append Trenni::Template.capture(self, &block)
+									builder.capture(self, &block)
 								else
 									builder.text title_for(options)
 								end
@@ -106,7 +106,7 @@ module Trenni
 									item(:title => optional_title_for(options), :value => nil, :builder => builder)
 								end
 								
-								builder.append Trenni::Template.capture(self, &block)
+								builder.capture(self, &block)
 							end
 						end
 					end

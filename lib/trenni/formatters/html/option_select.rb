@@ -109,7 +109,7 @@ module Trenni
 								item(:title => optional_title_for(options), :value => nil, :builder => builder)
 							end
 							
-							builder.append Trenni::Template.capture(&block)
+							builder.capture(&block)
 						end
 					end
 				end
@@ -131,7 +131,7 @@ module Trenni
 								item(:title => optional_title_for(options), :value => nil, :builder => builder)
 							end
 							
-							builder.append Trenni::Template.capture(self, &block)
+							builder.capture(self, &block)
 						end
 					end
 				end

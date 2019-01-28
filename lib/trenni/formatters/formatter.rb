@@ -25,16 +25,35 @@ require 'mapping/descendants'
 module Trenni
 	module Formatters
 		class Formatter < Mapping::Model
-			def self.for(object, key = nil, **options)
-				self.new(object: object, nested: key, **options)
+			def self.for(object, **options)
+				self.new(object: object, **options)
 			end
 			
 			def initialize(**options)
 				@options = options
 			end
 			
+			# The target object of the form.
+			def object
+				@object ||= @options[:object]
+			end
+			
+			def nested_name_for(**options)
+				name_for(**options)
+			end
+			
+			def nested(name, key = name, formatter: self.class)
+				options = @options.dup
+				target = self.object.send(name)
+				
+				options[:object] = target
+				options[:nested_name] = nested_name_for(name: key)
+				
+				yield formatter.new(**options)
+			end
+			
 			attr :options
-
+			
 			def format_unspecified(object, options)
 				object.to_s
 			end

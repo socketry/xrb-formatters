@@ -45,7 +45,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 		
 		context "with key" do
-			let(:formatter) {FormFormatter.for(double(bar: 10), :attributes)}
+			let(:formatter) {FormFormatter.for(double(bar: 10), nested_name: 'attributes')}
 			
 			it "should generate form with nested name" do
 				result = formatter.input(:field => :bar)

@@ -24,25 +24,6 @@ module Trenni
 	module Formatters
 		module HTML
 			module FormFormatter
-				# The target object of the form.
-				def object
-					@object ||= @options[:object]
-				end
-				
-				def nested_name_for(key)
-					name_for(name: key)
-				end
-				
-				def nested(name, key = name, formatter: self.class)
-					options = @options.dup
-					target = self.object.send(name)
-					
-					options[:object] = target
-					options[:nested] = nested_name_for(key)
-					
-					yield formatter.new(**options)
-				end
-				
 				# Return true if the object is begin created or false if it is being updated.
 				def new_record?
 					object.new_record?
@@ -57,8 +38,8 @@ module Trenni
 				def name_for(options)
 					name = options[:name] || options[:field]
 					
-					if nested = options[:nested]
-						"#{nested}[#{name}]"
+					if nested_name = options[:nested_name]
+						"#{nested_name}[#{name}]"
 					else
 						name
 					end

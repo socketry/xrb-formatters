@@ -31,11 +31,17 @@ module Trenni
 			
 			def initialize(**options)
 				@options = options
+				
+				@object = nil
 			end
 			
 			# The target object of the form.
 			def object
 				@object ||= @options[:object]
+			end
+			
+			def nested_name(**options)
+				options[:nested_name] || @options[:nested_name]
 			end
 			
 			# The name of the field, used for the name attribute of an input.
@@ -46,7 +52,7 @@ module Trenni
 					name = "#{name}#{suffix}"
 				end
 				
-				if nested_name = options[:nested_name]
+				if nested_name = self.nested_name(**options)
 					"#{nested_name}[#{name}]"
 				else
 					name

@@ -29,12 +29,16 @@ module Trenni
 					@object ||= @options[:object]
 				end
 				
+				def nested_name_for(key)
+					name_for(name: key)
+				end
+				
 				def nested(name, key = name, formatter: self.class)
 					options = @options.dup
 					target = self.object.send(name)
 					
 					options[:object] = target
-					options[:nested] = name_for(name: key)
+					options[:nested] = nested_name_for(key)
 					
 					yield formatter.new(**options)
 				end

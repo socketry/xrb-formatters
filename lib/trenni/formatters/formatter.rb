@@ -57,14 +57,18 @@ module Trenni
 				name_for(**options)
 			end
 			
-			def nested(name, key = name, formatter: self.class)
+			def nested(name, key = name, klass: self.class)
 				options = @options.dup
 				target = self.object.send(name)
 				
 				options[:object] = target
 				options[:nested_name] = nested_name_for(name: key)
 				
-				yield formatter.new(**options)
+				formatter = klass.new(**options)
+				
+				return formatter unless block_given?
+				
+				yield formatter
 			end
 			
 			attr :options

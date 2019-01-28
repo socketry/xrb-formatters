@@ -27,24 +27,24 @@ module Trenni
 			def truncated_text(content, options = {})
 				if content
 					length  = options.fetch(:length, 30)
-
+					
 					content = TruncatedText.truncate_text(content, length, options)
 					
 					return self.format(content)
 				end
 			end
-
+			
 			def self.truncate_text(text, truncate_at, options = {})
 				return text.dup unless text.length > truncate_at
-
+				
 				options[:omission] ||= '...'
 				length_with_room_for_omission = truncate_at - options[:omission].length
 				stop = if options[:separator]
-						text.rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
-					else
-						length_with_room_for_omission
-					end
-
+					text.rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
+				else
+					length_with_room_for_omission
+				end
+				
 				"#{text[0...stop]}#{options[:omission]}"
 			end
 		end

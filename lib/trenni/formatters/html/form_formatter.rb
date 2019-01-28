@@ -34,17 +34,6 @@ module Trenni
 					options[:details]
 				end
 				
-				# The name of the field, used for the name attribute of an input.
-				def name_for(options)
-					name = options[:name] || options[:field]
-					
-					if nested_name = options[:nested_name]
-						"#{nested_name}[#{name}]"
-					else
-						name
-					end
-				end
-				
 				def field_for(options)
 					options[:field]
 				end

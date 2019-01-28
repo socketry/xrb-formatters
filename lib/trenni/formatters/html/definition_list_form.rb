@@ -36,14 +36,14 @@ module Trenni
 					Builder.fragment do |builder|
 						builder.inline(:dt) do
 							builder.text title_for(options)
-							
-							if details = details_for(options)
-								builder.inline(:small) { builder.text details }
-							end
 						end
 						
 						builder.inline(:dd) do
 							builder.tag :input, input_attributes_for(options)
+							
+							if details = details_for(options)
+								builder.inline(:small, class: 'details') { builder.text details }
+							end
 						end
 					end
 				end
@@ -72,7 +72,7 @@ module Trenni
 								builder.text title_for(options)
 								
 								if details = details_for(options)
-									builder.inline(:small) { builder.text details }
+									builder.inline(:small, class: 'details') { builder.text details }
 								end
 						end
 
@@ -91,10 +91,15 @@ module Trenni
 					Builder.fragment do |builder|
 						builder.tag(:dd) do
 							builder.tag :input, :type => :hidden, :name => name_for(options), :value => 'false'
+							
 							builder.inline(:label) do
 								builder.tag :input, checkbox_attributes_for(options)
 								# We would like a little bit of whitespace between the checkbox and the title.
 								builder.text " " + title_for(options)
+							end
+							
+							if details = details_for(options)
+								builder.inline(:small, class: 'details') { builder.text details }
 							end
 						end
 					end
@@ -117,14 +122,14 @@ module Trenni
 					buffer << Builder.fragment do |builder|
 						builder.inline(:dt) do
 							builder.text title_for(options)
-							
-							if details = details_for(options)
-								builder.inline(:small) { builder.text details }
-							end
 						end
 						
 						builder.tag(:dd) do
 							klass.call(self, options, builder, &block)
+							
+							if details = details_for(options)
+								builder.inline(:small, class: 'details') { builder.text details }
+							end
 						end
 					end
 				end

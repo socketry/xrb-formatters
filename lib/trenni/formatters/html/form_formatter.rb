@@ -28,7 +28,17 @@ module Trenni
 				def object
 					@object ||= @options[:object]
 				end
-
+				
+				def nested(name, key = name, formatter: self.class)
+					options = @options.dup
+					target = self.object.send(name)
+					
+					options[:object] = target
+					options[:nested] = name_for(name: key)
+					
+					yield formatter.new(**options)
+				end
+				
 				# Return true if the object is begin created or false if it is being updated.
 				def new_record?
 					object.new_record?
@@ -41,7 +51,13 @@ module Trenni
 				
 				# The name of the field, used for the name attribute of an input.
 				def name_for(options)
-					options[:name] || options[:field]
+					name = options[:name] || options[:field]
+					
+					if nested = options[:nested]
+						"#{nested}[#{name}]"
+					else
+						name
+					end
 				end
 				
 				def field_for(options)

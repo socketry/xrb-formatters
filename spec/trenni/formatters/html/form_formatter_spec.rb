@@ -27,7 +27,7 @@ module Trenni::Formatters::FormFormatterSpec
 	end
 	
 	describe Trenni::Formatters do
-		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
+		let(:formatter) {FormFormatter.for(double(bar: 10))}
 		
 		it "should generate form" do
 			result = formatter.input(:field => :bar)
@@ -42,6 +42,27 @@ module Trenni::Formatters::FormFormatterSpec
 		it "should have a different title" do
 			result = formatter.input(:field => :bar, :title => "Title")
 			expect(result).to be == %Q{<dt>Title</dt>\n<dd><input name="bar" value="10"/></dd>}
+		end
+		
+		context "with key" do
+			let(:formatter) {FormFormatter.for(double(bar: 10), :attributes)}
+			
+			it "should generate form with nested name" do
+				result = formatter.input(:field => :bar)
+				expect(result).to be == %Q{<dt>Bar</dt>\n<dd><input name="attributes[bar]" value="10"/></dd>}
+			end
+		end
+		
+		context "with nested object" do
+			let(:formatter) {FormFormatter.for(double(animal: double(name: "cat")))}
+			
+			it "can generate nested attributes" do
+				result = formatter.nested(:animal) do |formatter|
+					formatter.input(field: :name)
+				end
+				
+				expect(result).to be == %Q{<dt>Name</dt>\n<dd><input name="animal[name]" value="cat"/></dd>}
+			end
 		end
 	end
 	

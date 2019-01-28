@@ -25,7 +25,11 @@ require 'mapping/descendants'
 module Trenni
 	module Formatters
 		class Formatter < Mapping::Model
-			def initialize(options = {})
+			def self.for(object, key = nil, **options)
+				self.new(object: object, nested: key, **options)
+			end
+			
+			def initialize(**options)
 				@options = options
 			end
 			

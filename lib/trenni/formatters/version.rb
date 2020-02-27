@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Copyright, 2012, by Samuel G. D. Williams. <http://www.codeotaku.com>
 # 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,6 +22,6 @@
 
 module Trenni
 	module Formatters
-		VERSION = "2.8.1"
+		VERSION = "2.9.0"
 	end
 end

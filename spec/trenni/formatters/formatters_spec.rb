@@ -22,7 +22,7 @@ require 'trenni/formatters'
 
 module Trenni::FormattersSpec
 	class TestFormatter < Trenni::Formatters::Formatter
-		def initialize(*)
+		def initialize(*arguments, **options)
 			@count = 0
 			
 			super

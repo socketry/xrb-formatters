@@ -6,9 +6,6 @@ source 'https://rubygems.org'
 gemspec
 
 group :test do
-	gem 'sanitize'
+	gem 'trenni-sanitize'
 	gem 'kramdown'
-	
-	gem 'simplecov'
-	gem 'coveralls', require: false
 end

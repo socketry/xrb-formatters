@@ -20,20 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'sanitize'
 require 'kramdown'
 
 require 'trenni/markup'
+require 'trenni/sanitize/fragment'
 
 module Trenni
 	module Formatters
 		module Markdown
-			def markdown(text)
-				config = Sanitize::Config::BASIC.dup
+			def markdown(text, filter = Trenni::Sanitize::Fragment)
+				document = Kramdown::Document.new(text)
 				
-				config[:elements] += ['h1', 'h2', 'h3']
-				
-				html = Sanitize.clean(Kramdown::Document.new(text).to_html, config)
+				html = filter.parse(document.to_html).output
 				
 				return MarkupString.raw(html)
 			end

@@ -24,8 +24,6 @@ Gem::Specification.new do |spec|
 	spec.add_dependency "trenni", "~> 3.4"
 	spec.add_dependency "mapping", "~> 1.1"
 	
-	spec.add_dependency "trenni-sanitize"
-	
 	spec.add_development_dependency "covered"
 	spec.add_development_dependency "bundler"
 	spec.add_development_dependency "rspec"

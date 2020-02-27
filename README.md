@@ -12,7 +12,7 @@ formatting needs.
 
 ## Motivation
 
-`Trenni::Formatters` was a library extracted from [Financier](https://github.com/ioquatix/financier) which is a CouchDB backed invoicing system, itself, derived from an old Rails app. I was a bit envious of `form_for` in terms of the ease of generating forms, but found that it wasn't very extendable. I also found myself generating code to format model data as rich HTML. `Trenni::Formatters` attempts to be an easily extendable formatting module which can generate rich text, links and HTML.
+`Trenni::Formatters` was a library extracted from [Financier](https://github.com/ioquatix/financier), an small business management app, itself, derived from an old Rails app. I was a bit envious of `form_for` in terms of the ease of generating forms, but found that it wasn't very extendable. I also found myself generating code to format model data as rich HTML. `Trenni::Formatters` attempts to be an easily extendable formatting module which can generate rich text, links and HTML.
 
 ## Installation
 
@@ -33,13 +33,15 @@ Or install it yourself as:
 The most basic usage involves converting model data into presentation text by
 a mapping corresponding to the objects type:
 
-	formatter = Trenni::Formatters::Formatter.new
-		
-	formatter.for(String) do |value, options|
-		"String: #{value}"
-	end
-		
-	expect(formatter.format("foobar")).to be == "String: foobar"
+```ruby
+formatter = Trenni::Formatters::Formatter.new
+	
+formatter.for(String) do |value, options|
+	"String: #{value}"
+end
+	
+expect(formatter.format("foobar")).to be == "String: foobar"
+```
 
 For more examples please see `spec/`.
 

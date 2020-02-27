@@ -7,8 +7,7 @@ adapter that turns model data into presentation text.
 Formatters are designed to be customised, typically per-project, for specific
 formatting needs.
 
-[![Build Status](https://travis-ci.org/ioquatix/trenni-formatters.svg?branch=master)](https://travis-ci.org/ioquatix/trenni-formatters)
-[![Code Climate](https://codeclimate.com/github/ioquatix/trenni-formatters.png)](https://codeclimate.com/github/ioquatix/trenni-formatters)
+[![Development](https://github.com/socketry/variant/workflows/Development/badge.svg?branch=master)](https://github.com/socketry/variant/actions?workflow=Development)
 [![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-formatters/badge.svg)](https://coveralls.io/r/ioquatix/trenni-formatters)
 
 ## Motivation

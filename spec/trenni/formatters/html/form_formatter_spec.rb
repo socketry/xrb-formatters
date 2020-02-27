@@ -28,7 +28,7 @@ module Trenni::Formatters::FormFormatterSpec
 		include Trenni::Formatters::HTML::DefinitionListForm
 	end
 	
-	describe Trenni::Formatters do
+	RSpec.describe Trenni::Formatters do
 		let(:formatter) {FormFormatter.for(double(bar: 10))}
 		
 		it "should generate form" do
@@ -68,7 +68,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe "<input>" do
+	RSpec.describe "<input>" do
 		let(:formatter) {FormFormatter.new(:object => double(bar: 10, bob: true, dole: false))}
 		
 		it "should support support min, max and step" do
@@ -113,7 +113,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe '<input type="hidden">' do
+	RSpec.describe '<input type="hidden">' do
 		let(:formatter) {FormFormatter.new(:object => double(age: 20))}
 		
 		it "should generate hidden field" do
@@ -134,7 +134,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe '<input type="submit">' do
+	RSpec.describe '<input type="submit">' do
 		let(:new_record_formatter) {FormFormatter.new(:object => double(new_record?: true))}
 		let(:formatter) {FormFormatter.new(:object => double(new_record?: false))}
 		
@@ -154,7 +154,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe "<textarea>" do
+	RSpec.describe "<textarea>" do
 		let(:formatter) {FormFormatter.new(:object => double(details: "foo<bar>"))}
 		
 		it "should escape characters correctly" do
@@ -163,7 +163,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe "<output>" do
+	RSpec.describe "<output>" do
 		let(:formatter) {FormFormatter.new(:object => double(bar: 10, bob: true, dole: false))}
 		
 		it "should show output value" do
@@ -177,7 +177,7 @@ module Trenni::Formatters::FormFormatterSpec
 		end
 	end
 	
-	describe "<button>" do
+	RSpec.describe "<button>" do
 		let(:formatter) {FormFormatter.new}
 		
 		it "should generate reset button" do

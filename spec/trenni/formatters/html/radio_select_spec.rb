@@ -32,7 +32,7 @@ module Trenni::Formatters::HTML::RadioSelectSpec
 		end
 	end
 	
-	describe Trenni::Formatters::HTML::RadioSelect do
+	RSpec.describe Trenni::Formatters::HTML::RadioSelect do
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
 		it "should list items" do

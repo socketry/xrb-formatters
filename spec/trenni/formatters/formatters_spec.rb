@@ -39,14 +39,14 @@ module Trenni::FormattersSpec
 		end
 	end
 	
-	describe Trenni::Formatters do
+	RSpec.describe Trenni::Formatters do
 		let(:test_formatter) {TestFormatter.new(foo: :bar)}
-	
+		
 		it "should format string" do
 			expect(test_formatter.format("foobar")).to be == "String: foobar"
 			expect(test_formatter.count).to be == 1
 		end
-	
+		
 		it "should format numbers" do
 			expect(test_formatter.format(10)).to be == "10"
 			expect(test_formatter.count).to be == 0

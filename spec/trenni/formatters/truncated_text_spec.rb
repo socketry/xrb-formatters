@@ -23,7 +23,7 @@
 require 'trenni/formatters/formatter'
 require 'trenni/formatters/truncated_text'
 
-describe Trenni::Formatters::TruncatedText do
+RSpec.describe Trenni::Formatters::TruncatedText do
 	subject {Class.new(Trenni::Formatters::Formatter).include(Trenni::Formatters::TruncatedText).new}
 	
 	let(:sample_text) {"The quick brown fox jumped over the lazy dog!"}

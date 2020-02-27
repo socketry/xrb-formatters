@@ -44,7 +44,7 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 		end
 	end
 	
-	describe Trenni::Formatters::HTML::OptionSelect do
+	RSpec.describe Trenni::Formatters::HTML::OptionSelect do
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
 		it "should list items" do

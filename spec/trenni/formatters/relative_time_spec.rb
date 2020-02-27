@@ -23,7 +23,7 @@
 require 'trenni/formatters/formatter'
 require 'trenni/formatters/relative_time'
 
-describe Trenni::Formatters::RelativeTime do
+RSpec.describe Trenni::Formatters::RelativeTime do
 	subject {Class.new(Trenni::Formatters::Formatter).include(Trenni::Formatters::RelativeTime).new}
 	
 	let(:now) {Time.now}

@@ -23,7 +23,7 @@
 require 'trenni/formatters/formatter'
 require 'trenni/formatters/markdown'
 
-describe Trenni::Formatters::Markdown do
+RSpec.describe Trenni::Formatters::Markdown do
 	subject {Class.new(Trenni::Formatters::Formatter).include(Trenni::Formatters::Markdown).new}
 	
 	let(:sample_text) {"# Heading\n\nParagraph\n"}

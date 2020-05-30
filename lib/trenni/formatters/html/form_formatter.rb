@@ -94,12 +94,12 @@ module Trenni
 						:pattern => pattern_for(**options),
 						:placeholder => placeholder_for(**options),
 						# for <input type="range|number">
-						:min => options[:min],
-						:max => options[:max],
+						:min => options[:minimum] || options[:min],
+						:max => options[:maximum] || options[:max],
 						:step => options[:step],
 						# for <input type="text">
-						:minlength => options[:minlength],
-						:maxlength => options[:maxlength],
+						:minlength => options[:minimum] || options[:minlength],
+						:maxlength => options[:maximum] || options[:maxlength],
 						:data => options[:data],
 					}
 					
@@ -178,7 +178,7 @@ module Trenni
 				end
 
 				# A hidden field.
-				def hidden**options
+				def hidden(**options)
 					options = @options.merge(**options)
 
 					Builder.fragment do |builder|
@@ -209,12 +209,27 @@ module Trenni
 				end
 				
 				# A hidden field.
-				def button**options
+				def button(**options)
 					options = @options.merge(**options)
 
 					Builder.fragment do |builder|
 						builder.inline :button, button_attributes_for(**options) do
 							builder.text button_title_for(**options)
+						end
+					end
+				end
+				
+				def fieldset(**options, &block)
+					options = @options.merge(**options)
+					buffer = Trenni::Template.buffer(block.binding)
+					
+					Builder.fragment(buffer) do |builder|
+						builder.tag('fieldset') do
+							builder.inline('legend') do
+								builder.text title_for(**options)
+							end
+							
+							yield(builder)
 						end
 					end
 				end

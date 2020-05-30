@@ -32,7 +32,7 @@ module Trenni
 				include FormFormatter
 				
 				# An input field (single line text).
-				def input**options
+				def input(**options)
 					options = @options.merge(**options)
 
 					Builder.fragment do |builder|
@@ -51,7 +51,7 @@ module Trenni
 				end
 
 				# An output field for the result of a computation.
-				def output**options
+				def output(**options)
 					options = @options.merge(**options)
 
 					Builder.fragment do |builder|
@@ -66,7 +66,7 @@ module Trenni
 				end
 
 				# A textarea field (multi-line text).
-				def textarea**options
+				def textarea(**options)
 					options = @options.merge(**options)
 
 					Builder.fragment do |builder|
@@ -108,7 +108,7 @@ module Trenni
 				end
 
 				# A submission button
-				def submit**options
+				def submit(**options)
 					options = @options.merge(**options)
 					options[:title] ||= submit_title_for(**options)
 					
@@ -133,6 +133,12 @@ module Trenni
 								builder.inline(:small, class: 'details') {builder.text details}
 							end
 						end
+					end
+				end
+				
+				def fieldset(**options, &block)
+					super do |builder|
+						builder.tag(:dl, &block)
 					end
 				end
 			end

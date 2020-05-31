@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-require 'kramdown'
+require 'markly'
 
 require 'trenni/markup'
 require 'trenni/sanitize/fragment'
@@ -28,10 +28,10 @@ require 'trenni/sanitize/fragment'
 module Trenni
 	module Formatters
 		module Markdown
-			def markdown(text, filter = Trenni::Sanitize::Fragment)
-				document = Kramdown::Document.new(text)
+			def markdown(text, filter = Trenni::Sanitize::Fragment, **options)
+				root = Markly.parse(text, **options)
 				
-				html = filter.parse(document.to_html).output
+				html = filter.parse(root.to_html).output
 				
 				return MarkupString.raw(html)
 			end

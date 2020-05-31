@@ -7,5 +7,5 @@ gemspec
 
 group :test do
 	gem 'trenni-sanitize'
-	gem 'kramdown'
+	gem 'markly'
 end

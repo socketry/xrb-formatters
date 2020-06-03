@@ -124,7 +124,7 @@ module Trenni
 					end
 				end
 				
-				def element(klass, options = {}, &block)
+				def element(klass, **options, &block)
 					options = @options.merge(**options)
 					buffer = Trenni::Template.buffer(block.binding)
 					
@@ -138,7 +138,7 @@ module Trenni
 								end
 							end
 							
-							klass.call(self, options, builder, &block)
+							klass.call(self, builder, **options, &block)
 						end
 					end
 				end

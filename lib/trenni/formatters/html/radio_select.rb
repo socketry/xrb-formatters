@@ -27,20 +27,20 @@ module Trenni
 		module HTML
 			# Table based select boxes using per-row checkboxes.
 			class RadioSelect
-				def self.call(formatter, options, builder, &block)
-					instance = self.new(formatter, options, builder)
+				def self.call(formatter, builder, **options, &block)
+					instance = self.new(formatter, builder, **options)
 					
 					instance.call(options, &block)
 				end
 				
-				def initialize(formatter, options, builder)
+				def initialize(formatter, builder, **options)
 					@formatter = formatter
 					@object = formatter.object
 					
+					@builder = builder
+					
 					@options = options
 					@field = options[:field]
-					
-					@builder = builder
 				end
 
 				def name_for(**options)

@@ -116,8 +116,25 @@ module Trenni
 						builder.tag :input, submit_attributes_for(**options)
 					end
 				end
-
-				def element(klass, options = {}, &block)
+				
+				def fieldset(**options, &block)
+					options = @options.merge(**options)
+					buffer = Trenni::Template.buffer(block.binding)
+					
+					Builder.fragment(buffer) do |builder|
+						builder.tag('fieldset') do
+							builder.inline('legend') do
+								builder.text title_for(**options)
+							end
+							
+							builder.tag('dl') do
+								yield(builder)
+							end
+						end
+					end
+				end
+				
+				def element(klass, **options, &block)
 					options = @options.merge(**options)
 					buffer = Trenni::Template.buffer(block.binding)
 					
@@ -127,7 +144,7 @@ module Trenni
 						end
 						
 						builder.tag(:dd) do
-							klass.call(self, options, builder, &block)
+							klass.call(self, builder, **options, &block)
 							
 							if details = details_for(**options)
 								builder.inline(:small, class: 'details') {builder.text details}

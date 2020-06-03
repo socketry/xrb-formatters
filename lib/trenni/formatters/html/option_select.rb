@@ -27,20 +27,20 @@ module Trenni
 		module HTML
 			# Standard drop-down select box:
 			class OptionSelect
-				def self.call(formatter, options, builder, &block)
-					instance = self.new(formatter, options, builder)
+				def self.call(formatter, builder, **options, &block)
+					instance = self.new(formatter, builder, **options)
 					
 					instance.call(options, &block)
 				end
 				
-				def initialize(formatter, options, builder)
+				def initialize(formatter, builder, **options)
 					@formatter = formatter
 					@object = formatter.object
-					@field = options[:field]
-					
-					@options = options
 					
 					@builder = builder
+					
+					@options = options
+					@field = options[:field]
 				end
 
 				def name_for(**options)
@@ -123,6 +123,7 @@ module Trenni
 						:class => options[:class],
 						:multiple => options[:multiple],
 						:data => options[:data],
+						:required => options[:required],
 					}
 				end
 

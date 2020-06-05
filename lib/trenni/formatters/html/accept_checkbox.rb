@@ -54,7 +54,7 @@ module Trenni
 					@formatter.checkbox_attributes_for(**options)
 				end
 				
-				def call(options = {}, &block)
+				def call(**options, &block)
 					Builder.fragment(@builder) do |builder|
 						builder.inline('span') do
 							builder.inline :input, :type => :hidden, :name => name_for(**options), :value => 'false'

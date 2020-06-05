@@ -127,7 +127,7 @@ module Trenni
 					}
 				end
 
-				def call(options = {}, &block)
+				def call(**options, &block)
 					Builder.fragment(@builder) do |builder|
 						builder.tag :select, select_attributes_for(**options) do
 							if options[:optional]

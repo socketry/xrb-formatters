@@ -99,8 +99,6 @@ module Trenni
 							builder.inline :input, :type => :hidden, :name => name_for(**options), :value => 'false'
 							
 							builder.inline(:span) do
-								builder.text title_for(**options)
-								
 								if details = details_for(**options)
 									builder.inline(:small) {builder.text details}
 								end
@@ -108,7 +106,7 @@ module Trenni
 							
 							builder.tag :input, checkbox_attributes_for(**options)
 							
-							# We would like a little bit of whitespace between the checkbox and the title.
+							# We would like a little bit of whitespace between the checkbox and the title:
 							builder.text " " + title_for(**options)
 						end
 					end

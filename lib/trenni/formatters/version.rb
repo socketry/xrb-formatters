@@ -22,6 +22,6 @@
 
 module Trenni
 	module Formatters
-		VERSION = "2.12.1"
+		VERSION = "2.12.2"
 	end
 end

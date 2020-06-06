@@ -36,7 +36,7 @@ a mapping corresponding to the objects type:
 ```ruby
 formatter = Trenni::Formatters::Formatter.new
 	
-formatter.for(String) do |value, options|
+formatter.for(String) do |value, **options|
 	"String: #{value}"
 end
 	

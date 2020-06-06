@@ -27,8 +27,8 @@ module Trenni::Formatters::HTML::RadioSelectSpec
 	class FormFormatter < Trenni::Formatters::Formatter
 		include Trenni::Formatters::HTML::DefinitionListForm
 		
-		def select(options = {}, &block)
-			element(Trenni::Formatters::HTML::RadioSelect, options, &block)
+		def select(**options, &block)
+			element(Trenni::Formatters::HTML::RadioSelect, **options, &block)
 		end
 	end
 	

@@ -69,7 +69,7 @@ module Trenni
 				# The value of the field.
 				def value_for(**options)
 					if value = raw_value_for(**options)
-						self.format(value, options)
+						self.format(value, **options)
 					end
 				end
 

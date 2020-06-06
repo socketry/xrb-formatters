@@ -27,7 +27,7 @@ module Trenni
 	module Formatters
 		module RelativeTime
 			def self.included(base)
-				base.map(Time) do |object, options|
+				base.map(Time) do |object, **options|
 					current_time = options.fetch(:current_time) {Time.now}
 					
 					# Ensure we display the time in localtime, and show the year if it is different:

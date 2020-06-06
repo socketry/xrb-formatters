@@ -29,37 +29,29 @@ module Trenni
 				def self.call(formatter, builder, **options, &block)
 					instance = self.new(formatter, builder, **options)
 					
-					instance.call(options, &block)
+					instance.call(&block)
 				end
 				
 				def initialize(formatter, builder, **options)
 					@formatter = formatter
-					@object = formatter.object
-					
 					@builder = builder
-					
 					@options = options
-					@field = options[:field]
 				end
 				
 				def name_for(**options)
 					@formatter.name_for(**options)
 				end
 				
-				def title_for(**options)
-					@formatter.title_for(**options)
-				end
-				
 				def checkbox_attributes_for(**options)
 					@formatter.checkbox_attributes_for(**options)
 				end
 				
-				def call(**options, &block)
+				def call(&block)
 					Builder.fragment(@builder) do |builder|
 						builder.inline('span') do
-							builder.inline :input, :type => :hidden, :name => name_for(**options), :value => 'false'
+							builder.inline :input, type: :hidden, name: name_for(**@options), value: 'false'
 							
-							builder.tag :input, checkbox_attributes_for(**options)
+							builder.tag :input, checkbox_attributes_for(**@options)
 							
 							builder.text " "
 							

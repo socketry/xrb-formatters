@@ -117,23 +117,6 @@ module Trenni
 					end
 				end
 				
-				def fieldset(**options, &block)
-					options = @options.merge(**options)
-					buffer = Trenni::Template.buffer(block.binding)
-					
-					Builder.fragment(buffer) do |builder|
-						builder.tag('fieldset') do
-							builder.inline('legend') do
-								builder.text title_for(**options)
-							end
-							
-							builder.tag('dl') do
-								yield(builder)
-							end
-						end
-					end
-				end
-				
 				def element(klass, **options, &block)
 					options = @options.merge(**options)
 					buffer = Trenni::Template.buffer(block.binding)
@@ -155,7 +138,9 @@ module Trenni
 				
 				def fieldset(**options, &block)
 					super do |builder|
-						builder.tag(:dl, &block)
+						builder.tag(:dl) do
+							yield(builder)
+						end
 					end
 				end
 			end

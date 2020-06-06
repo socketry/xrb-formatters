@@ -81,17 +81,17 @@ module Trenni
 			
 			attr :options
 			
-			def format_unspecified(object, options)
+			def format_unspecified(object, **options)
 				object.to_s
 			end
 
-			def format(object, options = {})
+			def format(object, **options)
 				method_name = self.method_for_mapping(object)
 				
 				if self.respond_to?(method_name)
-					self.send(method_name, object, options)
+					self.send(method_name, object, **options)
 				else
-					format_unspecified(object, options)
+					format_unspecified(object, **options)
 				end
 			end
 
@@ -101,15 +101,15 @@ module Trenni
 				@options[key]
 			end
 			
-			map(String) do |object, options|
+			map(String) do |object, **options|
 				object
 			end
 			
-			map(NilClass) do |object, options|
+			map(NilClass) do |object, **options|
 				options[:blank] || @options[:blank] || ""
 			end
 			
-			map(TrueClass, FalseClass, *Mapping.lookup_descendants(Numeric)) do |object, options|
+			map(TrueClass, FalseClass, *Mapping.lookup_descendants(Numeric)) do |object, **options|
 				object.to_s
 			end
 		end

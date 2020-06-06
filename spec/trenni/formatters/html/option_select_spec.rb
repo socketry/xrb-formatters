@@ -28,8 +28,8 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 	class FormFormatter < Trenni::Formatters::Formatter
 		include Trenni::Formatters::HTML::DefinitionListForm
 		
-		def select(options = {}, &block)
-			element(Trenni::Formatters::HTML::OptionSelect, options, &block)
+		def select(**options, &block)
+			element(Trenni::Formatters::HTML::OptionSelect, **options, &block)
 		end
 	end
 	

@@ -30,19 +30,17 @@ module Trenni
 				def self.call(formatter, builder, **options, &block)
 					instance = self.new(formatter, builder, **options)
 					
-					instance.call(options, &block)
+					instance.call(&block)
 				end
 				
 				def initialize(formatter, builder, **options)
 					@formatter = formatter
-					@object = formatter.object
-					
 					@builder = builder
-					
 					@options = options
+					
 					@field = options[:field]
 				end
-
+				
 				def name_for(**options)
 					@formatter.name_for(**options)
 				end
@@ -50,19 +48,19 @@ module Trenni
 				def raw_value_for(**options)
 					@formatter.raw_value_for(**options)
 				end
-
+				
 				def raw_value
 					@raw_value ||= raw_value_for(**@options)
 				end
-
+				
 				def value_for(**options)
 					@formatter.value_for(**options)
 				end
-
+				
 				def title_for(**options)
 					@formatter.title_for(**options)
 				end
-
+				
 				def radio_attributes_for(**options)
 					return {
 						:type => :radio,
@@ -73,8 +71,8 @@ module Trenni
 						:data => options[:data],
 					}
 				end
-
-				def item(builder: nil, **options, &block)
+				
+				def item(builder = nil, **options, &block)
 					Builder.fragment(builder) do |builder|
 						builder.tag :tr do
 							builder.inline(:td, :class => :handle) do
@@ -99,13 +97,17 @@ module Trenni
 						options[:optional]
 					end
 				end
-
-				def call(**options, &block)
+				
+				def optional?
+					@options[:optional]
+				end
+				
+				def call(&block)
 					Builder.fragment(@builder) do |builder|
 						builder.tag :table do
 							builder.tag :tbody do
-								if options[:optional]
-									item(:title => optional_title_for(**options), :value => nil, :builder => builder)
+								if self.optional?
+									item(builder, title: optional_title_for(**@options), value: nil)
 								end
 								
 								builder.capture(self, &block)

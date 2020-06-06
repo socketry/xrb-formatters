@@ -32,7 +32,7 @@ module Trenni::FormattersSpec
 		
 		attr :count
 		
-		map(String) do |value, options|
+		map(String) do |value, **options|
 			@count += 1
 			
 			"String: #{value}"

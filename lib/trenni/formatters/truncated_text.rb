@@ -26,28 +26,30 @@ require 'mapping/model'
 module Trenni
 	module Formatters
 		module TruncatedText
-			def truncated_text(content, options = {})
+			def truncated_text(content, length: 30, **options)
 				if content
-					length  = options.fetch(:length, 30)
-					
-					content = TruncatedText.truncate_text(content, length, options)
+					content = TruncatedText.truncate_text(content, length, **options)
 					
 					return self.format(content)
 				end
 			end
 			
-			def self.truncate_text(text, truncate_at, options = {})
+			def self.truncate_text(text, truncate_at, omission: nil, separator: nil, **options)
 				return text.dup unless text.length > truncate_at
 				
-				options[:omission] ||= '...'
-				length_with_room_for_omission = truncate_at - options[:omission].length
-				stop = if options[:separator]
-					text.rindex(options[:separator], length_with_room_for_omission) || length_with_room_for_omission
-				else
-					length_with_room_for_omission
+				omission ||= '...'
+				
+				length_with_room_for_omission = truncate_at - omission.length
+				
+				stop = nil
+				
+				if separator
+					stop = text.rindex(separator, length_with_room_for_omission)
 				end
 				
-				"#{text[0...stop]}#{options[:omission]}"
+				stop ||= length_with_room_for_omission
+				
+				"#{text[0...stop]}#{omission}"
 			end
 		end
 	end

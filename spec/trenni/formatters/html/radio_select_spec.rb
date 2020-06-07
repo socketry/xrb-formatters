@@ -45,7 +45,23 @@ module Trenni::Formatters::HTML::RadioSelectSpec
 				end
 			end
 			
-			expect(captured).to be == %Q{<dt>Bar</dt>\n<dd>\n\t<table>\n\t\t<tbody>\n\t\t\t<tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="0"/></td>\n\t\t\t\t<td class="item">A</td>\n\t\t\t</tr><tr>\n\t\t\t\t<td class="handle"><input type="radio" name="bar" value="10" checked/></td>\n\t\t\t\t<td class="item">B</td>\n\t\t\t</tr>\n\t\t</tbody>\n\t</table>\n</dd>}
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<table>
+						<tbody>
+							<tr>
+								<td class="handle"><input type="radio" name="bar" value="0"/></td>
+								<td class="item">A</td>
+							</tr>
+							<tr>
+								<td class="handle"><input type="radio" name="bar" value="10" checked/></td>
+								<td class="item">B</td>
+							</tr>
+						</tbody>
+					</table>
+				</dd>
+			EOF
 		end
 	end
 end

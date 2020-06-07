@@ -119,9 +119,8 @@ module Trenni
 				
 				def element(klass, **options, &block)
 					options = @options.merge(**options)
-					buffer = Trenni::Template.buffer(block.binding)
 					
-					buffer << Builder.fragment do |builder|
+					Builder.fragment(block&.binding) do |builder|
 						builder.inline(:dt) do
 							builder.text title_for(**options)
 						end

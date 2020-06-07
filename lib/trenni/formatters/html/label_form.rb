@@ -126,7 +126,7 @@ module Trenni
 					options = @options.merge(**options)
 					buffer = Trenni::Template.buffer(block.binding)
 					
-					buffer << Builder.fragment do |builder|
+					Builder.fragment(buffer) do |builder|
 						builder.inline(:label) do
 							builder.inline(:span) do
 								builder.text title_for(**options)

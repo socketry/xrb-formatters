@@ -75,11 +75,17 @@ module Trenni
 					}
 				end
 				
-				def item(builder = nil, **options)
+				def item(**options, &block)
 					options[:field] ||= 'id'
 					
-					Builder.fragment(builder) do |builder|
-						builder.inline(:option, option_attributes_for(**options)) {builder.text title_for(**options)}
+					Builder.fragment(block&.binding || @builder) do |builder|
+						builder.inline(:option, option_attributes_for(**options)) do
+							if block_given?
+								builder.capture(self, &block)
+							else
+								builder.text title_for(**options)
+							end
+						end
 					end
 				end
 				
@@ -101,14 +107,12 @@ module Trenni
 				end
 				
 				def group(**options, &block)
-					Builder.fragment(@builder) do |builder|
-						builder.tag :optgroup, group_attributes_for(**options) do
-							if options[:optional]
-								item(@builder, title: optional_title_for(**options), value: nil)
-							end
-							
-							builder.capture(&block)
+					@builder.tag :optgroup, group_attributes_for(**options) do
+						if options[:optional]
+							item(title: optional_title_for(**options), value: nil)
 						end
+						
+						@builder.capture(&block)
 					end
 				end
 				
@@ -131,7 +135,7 @@ module Trenni
 					Builder.fragment(@builder) do |builder|
 						builder.tag :select, select_attributes_for(**@options) do
 							if self.optional?
-								item(builder, title: optional_title_for(**@options), value: nil)
+								builder << item(title: optional_title_for(**@options), value: nil)
 							end
 							
 							builder.capture(self, &block)

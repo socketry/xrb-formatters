@@ -33,17 +33,6 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 		end
 	end
 	
-	def capture(&block)
-		_out = ""
-		
-		Trenni::Template.capture do
-			formatter.select :field => :bar do |select|
-				_out << select.item(:title => "A", :value => 0)
-				_out << select.item(:title => "B", :value => 10)
-			end
-		end
-	end
-	
 	RSpec.describe Trenni::Formatters::HTML::OptionSelect do
 		let(:formatter) {FormFormatter.new(:object => double(:bar => 10))}
 		
@@ -57,7 +46,15 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar">
+						<option value="0">A</option>
+						<option value="10" selected>B</option>
+					</select>
+				</dd>
+			EOF
 		end
 		
 		it "should list items with data attributes" do
@@ -69,7 +66,14 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option value=\"0\" data-foo=\"bar\">A</option>\n\t</select>\n</dd>"
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar">
+						<option value="0" data-foo="bar">A</option>
+					</select>
+				</dd>
+			EOF
 		end
 		
 		it "should list items for multiple selection" do
@@ -82,7 +86,15 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar[]\" multiple>\n\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar[]" multiple>
+						<option value="0">A</option>
+						<option value="10" selected>B</option>
+					</select>
+				</dd>
+			EOF
 		end
 		
 		it "should add optional item" do
@@ -95,7 +107,17 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<option></option>\t\t<option value=\"0\">A</option><option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar">
+						<option></option>
+						<option value="0">A</option>
+						<option value="10" selected>B</option>
+					</select>
+				</dd>
+			EOF
 		end
 		
 		it "should add optional item in group" do
@@ -110,7 +132,18 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option></option>\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar">
+						<optgroup label="group">
+							<option></option>
+							<option value="0">A</option>
+						</optgroup>
+						<option value="10" selected>B</option>
+					</select>
+				</dd>
+			EOF
 		end
 		
 		it "should add a group" do
@@ -125,7 +158,17 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 				end
 			end
 			
-			expect(captured).to be == "<dt>Bar</dt>\n<dd>\n\t<select name=\"bar\">\n\t\t<optgroup label=\"group\">\n\t\t\t<option value=\"0\">A</option>\n\t\t</optgroup>\t\t<option value=\"10\" selected>B</option>\n\t</select>\n</dd>"
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<select name="bar">
+						<optgroup label="group">
+							<option value="0">A</option>
+						</optgroup>
+						<option value="10" selected>B</option>
+					</select>
+				</dd>
+			EOF
 		end
 	end
 end

@@ -72,8 +72,8 @@ module Trenni
 					}
 				end
 				
-				def item(builder = nil, **options, &block)
-					Builder.fragment(builder) do |builder|
+				def item(**options, &block)
+					Builder.fragment do |builder|
 						builder.tag :tr do
 							builder.inline(:td, :class => :handle) do
 								builder.tag :input, radio_attributes_for(**options)
@@ -87,7 +87,7 @@ module Trenni
 								end
 							end
 						end
-					end >> block
+					end
 				end
 
 				def optional_title_for(**options)
@@ -107,7 +107,7 @@ module Trenni
 						builder.tag :table do
 							builder.tag :tbody do
 								if self.optional?
-									item(builder, title: optional_title_for(**@options), value: nil)
+									builder << item(title: optional_title_for(**@options), value: nil)
 								end
 								
 								builder.capture(self, &block)

@@ -7,8 +7,7 @@ adapter that turns model data into presentation text.
 Formatters are designed to be customised, typically per-project, for specific
 formatting needs.
 
-[![Development](https://github.com/socketry/variant/workflows/Development/badge.svg?branch=master)](https://github.com/socketry/variant/actions?workflow=Development)
-[![Coverage Status](https://coveralls.io/repos/ioquatix/trenni-formatters/badge.svg)](https://coveralls.io/r/ioquatix/trenni-formatters)
+[![Development Status](https://github.com/ioquatix/trenni-formatters/workflows/Development/badge.svg)](https://github.com/ioquatix/trenni-formatters/actions?workflow=Development)
 
 ## Motivation
 
@@ -18,22 +17,22 @@ formatting needs.
 
 Add this line to your application's Gemfile:
 
-	gem 'trenni-formatters'
+    gem 'trenni-formatters'
 
 And then execute:
 
-	$ bundle
+    $ bundle
 
 Or install it yourself as:
 
-	$ gem install trenni-formatters
+    $ gem install trenni-formatters
 
 ## Usage
 
 The most basic usage involves converting model data into presentation text by
 a mapping corresponding to the objects type:
 
-```ruby
+``` ruby
 formatter = Trenni::Formatters::Formatter.new
 	
 formatter.for(String) do |value, **options|
@@ -47,11 +46,11 @@ For more examples please see `spec/`.
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+1.  Fork it
+2.  Create your feature branch (`git checkout -b my-new-feature`)
+3.  Commit your changes (`git commit -am 'Add some feature'`)
+4.  Push to the branch (`git push origin my-new-feature`)
+5.  Create new Pull Request
 
 ## License
 

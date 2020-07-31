@@ -57,6 +57,27 @@ module Trenni::Formatters::HTML::OptionSelectSpec
 			EOF
 		end
 		
+		it "can capture item from block" do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
+				formatter.select :field => :bar do |select|
+					select.item(value: "A") do
+						_out << "Hello World"
+					end
+				end
+			end
+			
+			expect(captured).to be == <<~EOF.chomp
+			<dt>Bar</dt>
+			<dd>
+				<select name="bar">
+					<option value="A">Hello World</option>
+				</select>
+			</dd>
+			EOF
+		end
+		
 		it "should list items with data attributes" do
 			_out = ""
 			

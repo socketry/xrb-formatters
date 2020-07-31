@@ -63,5 +63,31 @@ module Trenni::Formatters::HTML::RadioSelectSpec
 				</dd>
 			EOF
 		end
+		
+		it "can capture item from block" do
+			_out = ""
+			
+			captured = Trenni::Template.capture do
+				formatter.select :field => :bar do |select|
+					select.item(value: "A") do
+						_out << "Hello World"
+					end
+				end
+			end
+			
+			expect(captured).to be == <<~EOF.chomp
+				<dt>Bar</dt>
+				<dd>
+					<table>
+						<tbody>
+							<tr>
+								<td class="handle"><input type="radio" name="bar" value="A"/></td>
+								<td class="item">Hello World</td>
+							</tr>
+						</tbody>
+					</table>
+				</dd>
+			EOF
+		end
 	end
 end

@@ -73,7 +73,7 @@ module Trenni
 				end
 				
 				def item(**options, &block)
-					Builder.fragment do |builder|
+					Builder.fragment(block&.binding || @builder) do |builder|
 						builder.tag :tr do
 							builder.inline(:td, :class => :handle) do
 								builder.tag :input, radio_attributes_for(**options)

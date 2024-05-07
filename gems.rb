@@ -1,16 +1,26 @@
 # frozen_string_literal: true
 
+# Released under the MIT License.
+# Copyright, 2012-2024, by Samuel Williams.
+
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in trenni-formatters.gemspec
 gemspec
 
 group :maintenance, optional: true do
+	gem 'bake-gem'
 	gem 'bake-modernize'
-	gem 'bake-bundler'
+	
+	gem 'utopia-project'
 end
 
 group :test do
-	gem 'trenni-sanitize'
+	gem "sus"
+	gem "covered"
+	
+	gem 'xrb-sanitize'
 	gem 'markly'
+	
+	gem "bake-test"
+	gem "bake-test-external"
 end

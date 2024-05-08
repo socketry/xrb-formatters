@@ -5,6 +5,6 @@
 
 module XRB
 	module Formatters
-		VERSION = "2.13.1"
+		VERSION = "0.0.0"
 	end
 end

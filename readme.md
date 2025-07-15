@@ -29,24 +29,13 @@ Or install it yourself as:
 
 ## Usage
 
-The most basic usage involves converting model data into presentation text by
-a mapping corresponding to the objects type:
-
-``` ruby
-formatter = XRB::Formatters::Formatter.new
-	
-formatter.for(String) do |value, **options|
-	"String: #{value}"
-end
-	
-expect(formatter.format("foobar")).to be == "String: foobar"
-```
-
-For more examples please see `spec/`.
+Please see the [project documentation](https://github.com/ioquatix/xrb-formatters) for more details.
 
 ## Releases
 
-There are no documented releases.
+Please see the [project releases](https://github.com/ioquatix/xrb-formattersreleases/index) for all releases.
+
+### v0.1.1
 
 ## Contributing
 

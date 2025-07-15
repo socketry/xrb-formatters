@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2024, by Samuel Williams.
+# Copyright, 2020-2025, by Samuel Williams.
 
-require 'xrb/builder'
+require "xrb/builder"
 
 module XRB
 	module Formatters
@@ -31,8 +31,8 @@ module XRB
 				
 				def call(&block)
 					Builder.fragment(@builder) do |builder|
-						builder.inline('span') do
-							builder.inline :input, type: :hidden, name: name_for(**@options), value: 'false'
+						builder.inline("span") do
+							builder.inline :input, type: :hidden, name: name_for(**@options), value: "false"
 							
 							builder.tag :input, checkbox_attributes_for(**@options)
 							

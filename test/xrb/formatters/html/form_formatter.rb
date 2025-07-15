@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2012-2024, by Samuel Williams.
+# Copyright, 2012-2025, by Samuel Williams.
 
-require 'xrb/formatters'
-require 'xrb/formatters/html/definition_list_form'
+require "xrb/formatters"
+require "xrb/formatters/html/definition_list_form"
 
 class FormFormatter < XRB::Formatters::Formatter
 	include XRB::Formatters::HTML::DefinitionListForm
@@ -36,7 +36,7 @@ describe XRB::Formatters do
 	end
 	
 	with "key" do
-		let(:formatter) {FormFormatter.for(model.new(10), nested_name: 'attributes')}
+		let(:formatter) {FormFormatter.for(model.new(10), nested_name: "attributes")}
 		
 		it "should generate form with nested name" do
 			result = formatter.input(:field => :bar)
@@ -51,7 +51,7 @@ describe XRB::Formatters do
 		let(:model) {Struct.new(:animal)}
 		let(:animal) {Struct.new(:name)}
 		
-		let(:formatter) {FormFormatter.for(model.new(animal.new('cat')))}
+		let(:formatter) {FormFormatter.for(model.new(animal.new("cat")))}
 		
 		it "can generate nested attributes" do
 			result = formatter.nested(:animal) do |formatter|
@@ -146,7 +146,7 @@ describe '<input type="hidden">' do
 	end
 	
 	it "can have custom title" do
-		result = formatter.submit(title: 'Alice')
+		result = formatter.submit(title: "Alice")
 		expect(result).to be == <<~HTML.chomp
 			<input type="submit" value="Alice"/>
 		HTML
@@ -173,7 +173,7 @@ describe '<input type="submit">' do
 	end
 	
 	it "can have custom title" do
-		result = formatter.submit(title: 'Alice')
+		result = formatter.submit(title: "Alice")
 		expect(result).to be == <<~HTML.chomp
 			<input type="submit" value="Alice"/>
 		HTML

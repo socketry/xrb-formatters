@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2016-2024, by Samuel Williams.
+# Copyright, 2016-2025, by Samuel Williams.
 
-require 'xrb/formatters'
-require 'xrb/formatters/html/radio_select'
+require "xrb/formatters"
+require "xrb/formatters/html/radio_select"
 
 class FormFormatter < XRB::Formatters::Formatter
 	include XRB::Formatters::HTML::DefinitionListForm

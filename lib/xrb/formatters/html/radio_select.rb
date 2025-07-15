@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2012-2024, by Samuel Williams.
+# Copyright, 2012-2025, by Samuel Williams.
 
-require 'xrb/builder'
+require "xrb/builder"
 
 module XRB
 	module Formatters
@@ -75,7 +75,7 @@ module XRB
 
 				def optional_title_for(**options)
 					if options[:optional] == true
-						options[:blank] || ''
+						options[:blank] || ""
 					else
 						options[:optional]
 					end

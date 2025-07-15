@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2014-2024, by Samuel Williams.
+# Copyright, 2014-2025, by Samuel Williams.
 
-require 'xrb/formatters'
-require 'xrb/formatters/html/definition_list_form'
-require 'xrb/formatters/html/option_select'
+require "xrb/formatters"
+require "xrb/formatters/html/definition_list_form"
+require "xrb/formatters/html/option_select"
 
 Model = Struct.new(:bar)
 
@@ -67,7 +67,7 @@ describe XRB::Formatters::HTML::OptionSelect do
 		
 		captured = XRB::Template.capture do
 			formatter.select :field => :bar do |select|
-				_out << select.item(:title => "A", :value => 0, :data => {foo: 'bar'})
+				_out << select.item(:title => "A", :value => 0, :data => {foo: "bar"})
 			end
 		end
 		
@@ -130,7 +130,7 @@ describe XRB::Formatters::HTML::OptionSelect do
 		
 		captured = XRB::Template.capture do
 			formatter.select :field => :bar do |select|
-				select.group(title: 'group', optional: true) do
+				select.group(title: "group", optional: true) do
 					_out << select.item(:title => "A", :value => 0)
 				end
 				_out << select.item(:title => "B", :value => 10)
@@ -156,7 +156,7 @@ describe XRB::Formatters::HTML::OptionSelect do
 		
 		captured = XRB::Template.capture do
 			formatter.select :field => :bar do |select|
-				select.group(title: 'group') do
+				select.group(title: "group") do
 					_out << select.item(:title => "A", :value => 0)
 				end
 				_out << select.item(:title => "B", :value => 10)

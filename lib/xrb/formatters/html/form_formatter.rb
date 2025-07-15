@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2014-2024, by Samuel Williams.
+# Copyright, 2014-2025, by Samuel Williams.
 
-require 'xrb/builder'
+require "xrb/builder"
 
 module XRB
 	module Formatters
@@ -32,7 +32,7 @@ module XRB
 					# Generate a title from a field name:
 					if field_name = field_for(**options)
 						# Remove postfix "_id" or "_ids":
-						return Strings::to_title(field_name.to_s.sub(/_ids?/, ''))
+						return Strings::to_title(field_name.to_s.sub(/_ids?/, ""))
 					end
 				end
 
@@ -120,11 +120,11 @@ module XRB
 
 				def checkbox_attributes_for(**options)
 					return {
-						:type => options[:type] || 'checkbox',
+						:type => options[:type] || "checkbox",
 						:id => options[:id],
 						:class => options[:class],
 						:name => name_for(**options),
-						:value => 'true',
+						:value => "true",
 						:checked => raw_value_for(**options),
 						:required => options[:required],
 						:disabled => options[:disabled],
@@ -135,7 +135,7 @@ module XRB
 
 				def submit_attributes_for(**options)
 					return {
-						:type => options[:type] || 'submit',
+						:type => options[:type] || "submit",
 						:name => name_for(**options),
 						:id => options[:id],
 						:class => options[:class],
@@ -146,12 +146,12 @@ module XRB
 				end
 				
 				def submit_title_for(**options)
-					title_for(**options) || (new_record? ? 'Create' : 'Update')
+					title_for(**options) || (new_record? ? "Create" : "Update")
 				end
 				
 				def hidden_attributes_for(**options)
 					return {
-						:type => options[:type] || 'hidden',
+						:type => options[:type] || "hidden",
 						:id => options[:id],
 						:class => options[:class],
 						:name => name_for(**options),
@@ -171,7 +171,7 @@ module XRB
 				
 				def button_attributes_for(**options)
 					return {
-						:type => options[:type] || 'submit',
+						:type => options[:type] || "submit",
 						:name => name_for(**options),
 						:id => options[:id],
 						:class => options[:class],
@@ -182,7 +182,7 @@ module XRB
 				end
 				
 				def button_title_for(**options)
-					type = options.fetch(:type, 'submit').to_sym
+					type = options.fetch(:type, "submit").to_sym
 					
 					if type == :submit
 						submit_title_for(**options)
@@ -207,8 +207,8 @@ module XRB
 					buffer = XRB::Template.buffer(block.binding)
 					
 					Builder.fragment(buffer) do |builder|
-						builder.tag('fieldset') do
-							builder.inline('legend') do
+						builder.tag("fieldset") do
+							builder.inline("legend") do
 								builder.text title_for(**options)
 							end
 							

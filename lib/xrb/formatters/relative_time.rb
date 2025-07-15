@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2016-2024, by Samuel Williams.
+# Copyright, 2016-2025, by Samuel Williams.
 
-require 'xrb/strings'
-require 'mapping/model'
+require "xrb/strings"
+require "mapping/model"
 
 module XRB
 	module Formatters

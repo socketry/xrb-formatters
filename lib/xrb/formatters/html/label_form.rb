@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2020-2024, by Samuel Williams.
+# Copyright, 2020-2025, by Samuel Williams.
 
-require 'xrb/builder'
-require 'xrb/template'
+require "xrb/builder"
+require "xrb/template"
 
-require_relative 'form_formatter'
+require_relative "form_formatter"
 
 module XRB
 	module Formatters
@@ -79,7 +79,7 @@ module XRB
 					
 					Builder.fragment do |builder|
 						builder.inline(:label) do
-							builder.inline :input, :type => :hidden, :name => name_for(**options), :value => 'false'
+							builder.inline :input, :type => :hidden, :name => name_for(**options), :value => "false"
 							
 							builder.inline(:span) do
 								if details = details_for(**options)

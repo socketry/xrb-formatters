@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2017-2024, by Samuel Williams.
+# Copyright, 2024-2025, by Samuel Williams.
 
-require 'xrb/formatters/formatter'
-require 'xrb/formatters/markdown'
+require "xrb/formatters/formatter"
+require "xrb/formatters/markdown"
 
 describe XRB::Formatters::Markdown do
 	let(:formatter) {Class.new(XRB::Formatters::Formatter).include(XRB::Formatters::Markdown).new}

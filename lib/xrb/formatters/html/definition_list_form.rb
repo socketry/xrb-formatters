@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2012-2024, by Samuel Williams.
+# Copyright, 2012-2025, by Samuel Williams.
 
-require 'xrb/builder'
-require 'xrb/template'
+require "xrb/builder"
+require "xrb/template"
 
-require_relative 'form_formatter'
+require_relative "form_formatter"
 
 module XRB
 	module Formatters
@@ -27,7 +27,7 @@ module XRB
 							builder.tag :input, input_attributes_for(**options)
 							
 							if details = details_for(**options)
-								builder.inline(:small, class: 'details') {builder.text details}
+								builder.inline(:small, class: "details") {builder.text details}
 							end
 						end
 					end
@@ -54,11 +54,11 @@ module XRB
 
 					Builder.fragment do |builder|
 						builder.tag(:dt) do
-								builder.text title_for(**options)
+							builder.text title_for(**options)
 								
-								if details = details_for(**options)
-									builder.inline(:small, class: 'details') {builder.text details}
-								end
+							if details = details_for(**options)
+								builder.inline(:small, class: "details") {builder.text details}
+							end
 						end
 						
 						builder.inline(:dd) do
@@ -75,7 +75,7 @@ module XRB
 					
 					Builder.fragment do |builder|
 						builder.tag(:dd) do
-							builder.tag :input, :type => :hidden, :name => name_for(**options), :value => 'false'
+							builder.tag :input, :type => :hidden, :name => name_for(**options), :value => "false"
 							
 							builder.inline(:label) do
 								builder.tag :input, checkbox_attributes_for(**options)
@@ -84,7 +84,7 @@ module XRB
 							end
 							
 							if details = details_for(**options)
-								builder.inline(:small, class: 'details') {builder.text details}
+								builder.inline(:small, class: "details") {builder.text details}
 							end
 						end
 					end
@@ -112,7 +112,7 @@ module XRB
 							klass.call(self, builder, **options, &block)
 							
 							if details = details_for(**options)
-								builder.inline(:small, class: 'details') {builder.text details}
+								builder.inline(:small, class: "details") {builder.text details}
 							end
 						end
 					end

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2017-2024, by Samuel Williams.
+# Copyright, 2017-2025, by Samuel Williams.
 
-require 'xrb/formatters/formatter'
-require 'xrb/formatters/relative_time'
+require "xrb/formatters/formatter"
+require "xrb/formatters/relative_time"
 
 describe XRB::Formatters::RelativeTime do
 	let(:formatter) {Class.new(XRB::Formatters::Formatter).include(XRB::Formatters::RelativeTime).new}

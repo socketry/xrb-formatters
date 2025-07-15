@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2012-2024, by Samuel Williams.
+# Copyright, 2012-2025, by Samuel Williams.
 
-require 'xrb/formatters'
+require "xrb/formatters"
 
 class TestFormatter < XRB::Formatters::Formatter
 	def initialize(*arguments, **options)

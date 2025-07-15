@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 # Released under the MIT License.
-# Copyright, 2016-2024, by Samuel Williams.
+# Copyright, 2016-2025, by Samuel Williams.
 
-require 'markly'
+require "markly"
 
-require 'xrb/markup'
-require 'xrb/sanitize/fragment'
+require "xrb/markup"
+require "xrb/sanitize/fragment"
 
 module XRB
 	module Formatters

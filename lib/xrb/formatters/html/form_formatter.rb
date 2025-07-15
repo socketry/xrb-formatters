@@ -11,7 +11,7 @@ module XRB
 			module FormFormatter
 				# Return true if the object is begin created or false if it is being updated.
 				def new_record?
-					object.new_record?
+					object.nil? or object.new_record?
 				end
 				
 				# Any additional details relating to a field (e.g. explanation text)
